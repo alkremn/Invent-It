@@ -36,11 +36,14 @@
             </Button>
             <TableView fx:id="partTableView" layoutX="14.0" layoutY="90.0" prefHeight="260.0" prefWidth="535.0" style="-fx-border-width: 2; -fx-border-color: #ABABAB;" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="90.0">
               <columns>
-                <TableColumn fx:id="partIdColumn" minWidth="-1.0" prefWidth="125.0" style="-fx-border-color: #B1B1B1;" text="Part ID" />
-                <TableColumn fx:id="partNameColumn" minWidth="0.0" prefWidth="125.0" style="-fx-border-color: #B1B1B1;" text="Part Name" />
-                  <TableColumn fx:id="partInventoryColumn" minWidth="0.0" prefWidth="125.0" style="-fx-border-color: #B1B1B1;" text="Inventory Level" />
-                  <TableColumn fx:id="partPriceColumn" minWidth="0.0" prefWidth="143.0" style="-fx-border-color: #B1B1B1;" text="Price/Cost per Unit" />
+                <TableColumn fx:id="partIdColumn" minWidth="-1.0" prefWidth="123.0" style="-fx-border-color: #B1B1B1;" text="Part ID" />
+                <TableColumn fx:id="partNameColumn" minWidth="0.0" prefWidth="123.0" style="-fx-border-color: #B1B1B1;" text="Part Name" />
+                  <TableColumn fx:id="partInventoryColumn" minWidth="0.0" prefWidth="123.0" style="-fx-border-color: #B1B1B1;" text="Inventory Level" />
+                  <TableColumn fx:id="partPriceColumn" minWidth="0.0" prefWidth="141.0" style="-fx-border-color: #B1B1B1;" text="Price/Cost per Unit" />
               </columns>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
             </TableView>
             <Button layoutX="197.0" layoutY="375.0" mnemonicParsing="false" onAction="#addPartButtonHandler" prefHeight="40.0" prefWidth="100.0" style="-fx-border-color: #818181; -fx-border-radius: 5;" text="Add" textFill="#333333">
                <font>
@@ -72,11 +75,14 @@
             <TextField fx:id="searchProductField" layoutX="247.0" layoutY="36.0" prefHeight="25.0" prefWidth="186.0" promptText="search" />
             <TableView fx:id="productTableView" layoutX="32.0" layoutY="95.0" prefHeight="260.0" prefWidth="535.0" style="-fx-border-color: #ABABAB; -fx-border-width: 2;" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="90.0">
                <columns>
-                  <TableColumn fx:id="productIdColumn" minWidth="0.0" prefWidth="125.0" style="-fx-border-color: #ABABAB;" text="Product ID" />
-                  <TableColumn fx:id="productNameColumn" minWidth="0.0" prefWidth="125.0" style="-fx-border-color: #ABABAB;" text="Product Name" />
-                  <TableColumn fx:id="productInventoryColumn" minWidth="0.0" prefWidth="125.0" style="-fx-border-color: #ABABAB;" text="Inventory Level" />
-                  <TableColumn fx:id="productPriceColumn" minWidth="0.0" prefWidth="143.0" style="-fx-border-color: #ABABAB;" text="Price/Cost per Unit" />
+                  <TableColumn fx:id="productIdColumn" minWidth="0.0" prefWidth="123.0" style="-fx-border-color: #ABABAB;" text="Product ID" />
+                  <TableColumn fx:id="productNameColumn" minWidth="0.0" prefWidth="123.0" style="-fx-border-color: #ABABAB;" text="Product Name" />
+                  <TableColumn fx:id="productInventoryColumn" minWidth="0.0" prefWidth="123.0" style="-fx-border-color: #ABABAB;" text="Inventory Level" />
+                  <TableColumn fx:id="productPriceColumn" minWidth="0.0" prefWidth="141.0" style="-fx-border-color: #ABABAB;" text="Price/Cost per Unit" />
                </columns>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
             </TableView>
             <Button layoutX="449.0" layoutY="33.0" mnemonicParsing="false" onAction="#searchProductButtonHandler" prefHeight="30.0" prefWidth="78.0" style="-fx-border-color: #818181; -fx-border-radius: 5;" text="Search" textFill="#333333">
                <font>

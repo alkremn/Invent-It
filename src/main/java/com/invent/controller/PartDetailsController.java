@@ -1,23 +1,23 @@
 package com.invent.controller;
 
-
 import com.invent.MainApp;
 import com.invent.model.InHouse;
 import com.invent.model.Outsourced;
 import com.invent.model.Part;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
-import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 
 public class PartDetailsController {
 
     @FXML
-    private Label mainLabel;
+    private Label partLabel;
 
     @FXML
     private RadioButton inHouse;
@@ -68,7 +68,7 @@ public class PartDetailsController {
         this.part = part;
         if (part != null) {
 
-            mainLabel.setText("Modify Part");
+            partLabel.setText("Modify Part");
             partIdField.setText(part.partIDProperty().getValue().toString());
             partNameField.setText(part.nameProperty().getValue());
             partInvField.setText(part.inStackProperty().getValue().toString());
@@ -85,9 +85,6 @@ public class PartDetailsController {
                 companyMachineField.setText(((InHouse) part).machineIDProperty().getValue().toString());
                 isInhouse = true;
             }
-
-        } else {
-            mainLabel.setText("Add Part");
         }
     }
 
@@ -152,12 +149,11 @@ public class PartDetailsController {
         detailStage.close();
     }
 
-    public void setStage(Stage detailsStage) {
+    public void setPartStage(Stage detailsStage) {
         this.detailStage = detailsStage;
     }
 
     private boolean isInputValid() {
-
         StringBuilder error = new StringBuilder();
 
         //validate name field
@@ -225,6 +221,6 @@ public class PartDetailsController {
 
     @FXML
     void initialize() {
-        outSourced.setSelected(true);
+      outSourced.setSelected(true);
     }
 }

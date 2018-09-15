@@ -15,7 +15,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #D8D8D8;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.invent.controller.ProductDetailsController">
    <children>
-      <Label layoutX="29.0" layoutY="55.0" text="Add Product" textFill="#333333">
+      <Label fx:id="productLabel" layoutX="29.0" layoutY="55.0" text="Add Product" textFill="#333333">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>
@@ -53,7 +53,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <TextField disable="true" prefHeight="40.0" prefWidth="200.0" text="Auto Gen - Disabled" GridPane.columnIndex="1">
+            <TextField fx:id="productIdField" disable="true" prefHeight="40.0" prefWidth="200.0" text="Auto Gen - Disabled" GridPane.columnIndex="1">
                <font>
                   <Font size="14.0" />
                </font>
@@ -61,7 +61,7 @@
                   <Insets left="15.0" />
                </padding>
             </TextField>
-            <TextField fx:id="partNameField" prefHeight="40.0" prefWidth="200.0" promptText="Part Name" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <TextField fx:id="productNameField" focusTraversable="false" prefHeight="40.0" prefWidth="200.0" promptText="Part Name" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font size="14.0" />
                </font>
@@ -69,7 +69,7 @@
                   <Insets left="15.0" />
                </padding>
             </TextField>
-            <TextField fx:id="partInvField" prefHeight="40.0" prefWidth="200.0" promptText="Inv" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <TextField fx:id="productInvField" focusTraversable="false" prefHeight="40.0" prefWidth="200.0" promptText="Inv" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="14.0" />
                </font>
@@ -77,7 +77,7 @@
                   <Insets left="15.0" />
                </padding>
             </TextField>
-            <TextField fx:id="partPriceField" prefHeight="40.0" prefWidth="200.0" promptText="Price/Cost" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <TextField fx:id="productPriceField" focusTraversable="false" prefHeight="40.0" prefWidth="200.0" promptText="Price/Cost" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <font>
                   <Font size="14.0" />
                </font>
@@ -92,7 +92,7 @@
             </Label>
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="274.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <children>
-                  <TextField fx:id="partMaxField" prefColumnCount="3" prefHeight="40.0" prefWidth="100.0" promptText="Max">
+                  <TextField fx:id="productMaxField" focusTraversable="false" prefColumnCount="3" prefHeight="40.0" prefWidth="100.0" promptText="Max">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -108,7 +108,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="partMinField" prefHeight="40.0" prefWidth="100.0" promptText="Min">
+                  <TextField fx:id="productMinField" focusTraversable="false" prefHeight="40.0" prefWidth="100.0" promptText="Min">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -190,7 +190,7 @@
             </HBox>
          </children>
       </GridPane>
-      <Button layoutX="833.0" layoutY="472.0" mnemonicParsing="false" onAction="#deletePartHandler" prefHeight="35.0" prefWidth="75.0" style="-fx-border-color: #333333; -fx-border-radius: 5;" text="Delete" textFill="#333333">
+      <Button layoutX="834.0" layoutY="472.0" mnemonicParsing="false" onAction="#deletePartHandler" prefHeight="35.0" prefWidth="75.0" style="-fx-border-color: #333333; -fx-border-radius: 5;" text="Delete" textFill="#333333">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>

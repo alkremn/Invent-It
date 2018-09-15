@@ -138,10 +138,8 @@ public class MainPageController {
         if(productTableView.getSelectionModel().getSelectedIndex() >= 0){
             Product selectedProduct = productTableView.getSelectionModel().getSelectedItem();
             if(selectedProduct != null){
-                //mainApp.showProductWindow(selectedProduct);
+                mainApp.showProductWindow(selectedProduct);
             }
-            //TODO: implement logic to modify product
-
         }else {
             showAlertMessage("No Product selected", "please, Select the product in the table");
         }

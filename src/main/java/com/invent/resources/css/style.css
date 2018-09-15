@@ -1,16 +1,32 @@
 .root {
     -fx-background-image: url("../background.jpg");
+    -fx-focus-color: red;
 
 }
 
-.table-view .table-cell  {
+.toggle-button:selected{
+ -fx-border-color: #B1B1B1;
+ -fx-background-color: red;
+}
+
+
+.table-view {
     -fx-font-size: 12px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #333333;
-    -fx-padding: 0 0 0 10;
     -fx-border-color: #B1B1B1;
-
+    -fx-base: #F5F5F5;
+    -fx-control-inner-background: #F5F5F5;
+    -fx-background-color: #F5F5F5;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 5;
 }
+..table-row-cell{
+    -fx-padding: 10 0 10 0;
+}
+.table-row-cell:odd{
+-fx-background-color: red;
+}
+
 
 .button {
     -fx-background-color: linear-gradient(#f7f7f7, #bcbcbc);
