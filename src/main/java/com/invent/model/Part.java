@@ -10,7 +10,6 @@ public abstract class Part {
     private IntegerProperty min;
     private IntegerProperty max;
 
-
     public Part(int partID, String name, double price, int inStack, int min, int max) {
         this.partID = new SimpleIntegerProperty(partID);
         this.name = new SimpleStringProperty(name);

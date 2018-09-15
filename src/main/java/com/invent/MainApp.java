@@ -62,24 +62,25 @@ public class MainApp extends Application {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("fxml/PartDetails.fxml"));
 
-            Stage addPartWindow = new Stage();
-            addPartWindow.initModality(Modality.APPLICATION_MODAL);
+            Stage detailsWindow = new Stage();
+            detailsWindow.initModality(Modality.APPLICATION_MODAL);
             Scene scene = new Scene(loader.load());
             scene.getStylesheets().add(getClass().getResource("resources/css/style.css").toExternalForm());
-            addPartWindow.setScene(scene);
+            detailsWindow.setScene(scene);
 
             PartDetailsController controller = loader.getController();
             controller.setMainApp(this);
             controller.setPartFields(part);
+            controller.setStage(detailsWindow);
 
             if(part == null) {
-                addPartWindow.setTitle("Add New Part");
+                detailsWindow.setTitle("Add New Part");
             }
             else{
-                addPartWindow.setTitle("Modify Part");
+                detailsWindow.setTitle("Modify Part");
             }
 
-            addPartWindow.showAndWait();
+            detailsWindow.showAndWait();
 
         } catch (IOException e) {
             e.printStackTrace();
