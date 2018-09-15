@@ -1,0 +1,22 @@
+.root {
+    -fx-background-image: url("../background.jpg");
+
+}
+
+.table-view .table-cell  {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-padding: 0 0 0 10;
+    -fx-border-color: #B1B1B1;
+
+}
+
+.button {
+    -fx-background-color: linear-gradient(#f7f7f7, #bcbcbc);
+
+}
+
+.button:pressed  {
+    -fx-background-color: linear-gradient(#bcbcbc, #f7f7f7);
+}
