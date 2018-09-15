@@ -1,6 +1,6 @@
 .root {
     -fx-background-image: url("../background.jpg");
-    -fx-focus-color: red;
+    -fx-focus-color: #b5b3bc;
 
 }
 
@@ -10,21 +10,21 @@
 }
 
 
-.table-view {
-    -fx-font-size: 12px;
+.table-view .table-cell  {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
     -fx-border-color: #B1B1B1;
-    -fx-base: #F5F5F5;
-    -fx-control-inner-background: #F5F5F5;
-    -fx-background-color: #F5F5F5;
-    -fx-table-cell-border-color: transparent;
-    -fx-table-header-border-color: transparent;
-    -fx-padding: 5;
+
 }
-..table-row-cell{
-    -fx-padding: 10 0 10 0;
+.table-row-cell{
+     -fx-background-insets: 0, 0 0 1 0;
+    -fx-border-insets: 5px;
+     -fx-margin: 0;
 }
+
 .table-row-cell:odd{
--fx-background-color: red;
+-fx-background-color: beige;
 }
 
 
