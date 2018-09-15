@@ -60,13 +60,13 @@ public class PartDetailsController {
 
     private boolean isInhouse = false;
 
-    public void setMainApp(MainApp mainApp){
+    public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
 
-    public void setPartFields(Part part){
+    public void setPartFields(Part part) {
         this.part = part;
-        if(part != null){
+        if (part != null) {
 
             mainLabel.setText("Modify Part");
             partIdField.setText(part.partIDProperty().getValue().toString());
@@ -76,19 +76,17 @@ public class PartDetailsController {
             partMaxField.setText(part.maxProperty().getValue().toString());
             partMinField.setText(part.minProperty().getValue().toString());
 
-            if(part instanceof Outsourced) {
+            if (part instanceof Outsourced) {
                 companyMachineLabel.setText("Company Name");
                 companyMachineField.setText(((Outsourced) part).companyNameProperty().getValue());
-            }
-            else {
+            } else {
                 inHouse.setSelected(true);
                 companyMachineLabel.setText("Machine ID");
-                companyMachineField.setText(((InHouse)part).machineIDProperty().getValue().toString());
+                companyMachineField.setText(((InHouse) part).machineIDProperty().getValue().toString());
                 isInhouse = true;
             }
 
-        }
-        else{
+        } else {
             mainLabel.setText("Add Part");
         }
     }
@@ -96,7 +94,7 @@ public class PartDetailsController {
     @FXML
     void partSaveHandler(ActionEvent event) {
 
-        if(isInputValid()){
+        if (isInputValid()) {
 
             String name = partNameField.getText();
             int inv = Integer.parseInt(partInvField.getText());
@@ -105,19 +103,18 @@ public class PartDetailsController {
             int min = Integer.parseInt(partMinField.getText());
 
             int id;
-            if(part != null) {
+            if (part != null) {
                 part.nameProperty().setValue(name);
                 part.inStackProperty().setValue(inv);
                 part.priceProperty().setValue(price);
                 part.maxProperty().setValue(max);
                 part.minProperty().setValue(min);
-                if (isInhouse){
-                    ((InHouse)part).machineIDProperty().setValue(Integer.parseInt(companyMachineField.getText()));
+                if (isInhouse) {
+                    ((InHouse) part).machineIDProperty().setValue(Integer.parseInt(companyMachineField.getText()));
+                } else {
+                    ((Outsourced) part).companyNameProperty().setValue(companyMachineField.getText());
                 }
-                else{
-                    ((Outsourced)part).companyNameProperty().setValue(companyMachineField.getText());
-                }
-            }else {
+            } else {
                 id = mainApp.getInventory().getAllParts().size() + 1;
 
                 if (isInhouse) {
@@ -135,18 +132,19 @@ public class PartDetailsController {
         }
 
     }
+
     @FXML
-    void inHouseButtonHandler(ActionEvent event){
+    void inHouseButtonHandler(ActionEvent event) {
         companyMachineLabel.setText("Machine ID");
         companyMachineField.setPromptText("Mach ID");
 
     }
+
     @FXML
-    void outSourcedButtonHandler(ActionEvent event){
+    void outSourcedButtonHandler(ActionEvent event) {
         companyMachineLabel.setText("Company Name");
         companyMachineField.setPromptText("Comp Nm");
     }
-
 
 
     @FXML
@@ -154,74 +152,69 @@ public class PartDetailsController {
         detailStage.close();
     }
 
-    public void setStage(Stage detailsStage){
+    public void setStage(Stage detailsStage) {
         this.detailStage = detailsStage;
     }
 
-    private boolean isInputValid(){
+    private boolean isInputValid() {
 
         StringBuilder error = new StringBuilder();
 
         //validate name field
-        if(partNameField.getText() == null || partNameField.getText().length() == 0){
-            error.append("Invalid part name!\n");
+        if (partNameField.getText() == null || partNameField.getText().length() == 0) {
+            error.append("Name cannot be empty!\n");
         }
         //validate Inv field
-        if(partInvField.getText() == null || partInvField.getText().length() == 0){
-            error.append("Invalid part Inv!\n");
-        } else{
+        if (partInvField.getText() == null || partInvField.getText().length() == 0) {
+            error.append("Inv cannot be empty!\n");
+        } else {
             //try to parse it to integer
-            try{
+            try {
                 Integer.parseInt(partInvField.getText());
-            }
-            catch (NumberFormatException e){
-                error.append("Invalid Inv count(Must be an integer)!\n");
+            } catch (NumberFormatException e) {
+                error.append("Inv count must be an integer!\n");
             }
         }
         //validate price field
-        if(partPriceField.getText() == null || partPriceField.getText().length() == 0){
-            error.append("Invalid part price\n");
-        } else{
-            try{
-                Double.parseDouble(partInvField.getText());
-            }
-            catch (NumberFormatException e) {
-                error.append("Invalid part price(Must be an double)!\n");
+        if (partPriceField.getText() == null || partPriceField.getText().length() == 0) {
+            error.append("Price cannot be empty\n");
+        } else {
+            try {
+                Double.parseDouble(partPriceField.getText());
+            } catch (NumberFormatException e) {
+                error.append("Price must be an double!\n");
             }
         }
         //validate max field
-        if (partMaxField.getText() == null || partMaxField.getText().length() == 0){
-            error.append("Invalid Max number!\n");
-        }
-        else{
-            try{
+        if (partMaxField.getText() == null || partMaxField.getText().length() == 0) {
+            error.append("Max number cannot be empty!\n");
+        } else {
+            try {
                 Integer.parseInt(partMaxField.getText());
-            }catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 error.append("Max number must be a integer!\n");
             }
         }
         //validate min field
-        if (partMinField.getText() == null || partMinField.getText().length() == 0){
-            error.append("Invalid Min number!\n");
-        }
-        else{
-            try{
+        if (partMinField.getText() == null || partMinField.getText().length() == 0) {
+            error.append("Min number cannot be empty!\n");
+        } else {
+            try {
                 Integer.parseInt(partMinField.getText());
-            }catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 error.append("Min number must be a integer!\n");
             }
         }
-        if(companyMachineField.getText() == null || companyMachineField.getText().length() == 0){
-            if(isInhouse){
-                error.append("Invalid Machine ID!\n");
-            }
-            else {
-                error.append("Invalid Company Name!\n");
+        if (companyMachineField.getText() == null || companyMachineField.getText().length() == 0) {
+            if (isInhouse) {
+                error.append("Machine ID cannot be empty!\n");
+            } else {
+                error.append("Company Name cannot be empty!\n");
             }
         }
-        if(error.length() == 0){
+        if (error.length() == 0) {
             return true;
-        }else{
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Invalid fields");
             alert.setContentText(error.toString());
