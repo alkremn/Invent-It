@@ -91,6 +91,7 @@ public class MainPageController {
 
     @FXML
     void addProductButtonHandler(ActionEvent event) {
+        mainApp.showProductWindow(null);
 
     }
 
@@ -121,25 +122,41 @@ public class MainPageController {
     }
 
     @FXML
-    void modifyPartButtonHander(ActionEvent event) {
-        Part selectedProduct = partTableView.getSelectionModel().getSelectedItem();
-        if( selectedProduct != null){
-            mainApp.showPartWindow(selectedProduct);
+    void modifyPartButtonHandler(ActionEvent event) {
+        if(partTableView.getSelectionModel().getSelectedIndex() >= 0){
+            Part selectedProduct = partTableView.getSelectionModel().getSelectedItem();
+            if( selectedProduct != null){
+                mainApp.showPartWindow(selectedProduct);
+            }
+        }else{
+            showAlertMessage("No Part selected", "please, Select the part in the table");
         }
     }
 
     @FXML
     void modifyProductButtonHandler(ActionEvent event) {
+        if(productTableView.getSelectionModel().getSelectedIndex() >= 0){
+            Product selectedProduct = productTableView.getSelectionModel().getSelectedItem();
+            if(selectedProduct != null){
+                //mainApp.showProductWindow(selectedProduct);
+            }
+            //TODO: implement logic to modify product
 
+        }else {
+            showAlertMessage("No Product selected", "please, Select the product in the table");
+        }
     }
 
     @FXML
     void partSearchButtonHandler(ActionEvent event) {
 
+        //TODO: implement search part method
     }
 
     @FXML
     void searchProductButtonHandler(ActionEvent event) {
+
+        //TODO: implement search product method
 
     }
 

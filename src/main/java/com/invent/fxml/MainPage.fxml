@@ -47,7 +47,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button layoutX="312.0" layoutY="375.0" mnemonicParsing="false" onAction="#modifyPartButtonHander" prefHeight="40.0" prefWidth="100.0" style="-fx-border-color: #818181; -fx-border-radius: 5;" text="Modify">
+            <Button layoutX="312.0" layoutY="375.0" mnemonicParsing="false" onAction="#modifyPartButtonHandler" prefHeight="40.0" prefWidth="100.0" style="-fx-border-color: #818181; -fx-border-radius: 5;" text="Modify">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

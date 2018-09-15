@@ -88,6 +88,12 @@ public class MainApp extends Application {
     }
 
 
+    public void showProductWindow(Part part){
+
+
+    }
+
+
     // returns reference to the main stage
     public Stage getPrimaryStage(){
         return primaryStage;
