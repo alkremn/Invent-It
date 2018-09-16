@@ -4,7 +4,6 @@ import com.invent.MainApp;
 import com.invent.model.InHouse;
 import com.invent.model.Outsourced;
 import com.invent.model.Part;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;

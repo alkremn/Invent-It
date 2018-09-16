@@ -1,174 +1,176 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.geometry.Insets?><?import javafx.scene.control.Button?><?import javafx.scene.control.Label?><?import javafx.scene.control.RadioButton?><?import javafx.scene.control.TextField?><?import javafx.scene.layout.AnchorPane?><?import javafx.scene.layout.ColumnConstraints?><?import javafx.scene.layout.GridPane?><?import javafx.scene.layout.HBox?><?import javafx.scene.layout.RowConstraints?><?import javafx.scene.text.Font?><?import javafx.scene.control.ToggleGroup?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-    prefHeight="600.0" prefWidth="500.0"
-    xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+    prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
     fx:controller="com.invent.controller.PartDetailsController">
-   <children>
-      <Label fx:id="partLabel" layoutX="30.0" layoutY="55.0" text="Add Part" textFill="#333333">
-         <font>
-            <Font name="System Bold" size="21.0" />
-         </font>
-      </Label>
-      <HBox alignment="CENTER" layoutX="160.0" layoutY="48.0" prefHeight="49.0" prefWidth="258.0">
-         <children>
-            <fx:define>
-               <ToggleGroup fx:id = "toggleGroup" />
-            </fx:define>
-            <RadioButton fx:id="inHouse" onAction="#inHouseButtonHandler" mnemonicParsing="false" text="In-House" toggleGroup="$toggleGroup">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-               <padding>
-                  <Insets right="20.0" />
-               </padding>
-            </RadioButton>
-            <RadioButton fx:id="outSourced"  onAction="#outSourcedButtonHandler" mnemonicParsing="false" prefHeight="19.0" prefWidth="102.0"  text="Outsourced" toggleGroup="$toggleGroup">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </RadioButton>
-         </children>
-      </HBox>
-      <GridPane alignment="CENTER" hgap="10.0" layoutX="46.0" layoutY="108.0" prefHeight="359.0" prefWidth="390.0" vgap="10.0">
-        <columnConstraints>
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="175.3333740234375" minWidth="10.0" prefWidth="115.6666259765625" />
-          <ColumnConstraints fillWidth="false" halignment="LEFT" hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="241.3333740234375" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints maxHeight="197.00003051757812" minHeight="0.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="202.0" minHeight="0.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="308.0" minHeight="6.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="308.0" minHeight="10.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="308.0" minHeight="10.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="308.0" minHeight="10.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Label text="ID" textFill="#333333">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <Label text="Name" textFill="#333333" GridPane.rowIndex="1">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <Label text="Inv" textFill="#333333" GridPane.rowIndex="2">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <Label text="Price/Cost" textFill="#333333" GridPane.rowIndex="3">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <TextField fx:id="partIdField" disable="true" prefHeight="40.0" prefWidth="200.0" text="Auto Gen - Disabled" GridPane.columnIndex="1">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <padding>
-                  <Insets left="15.0" />
-               </padding>
-            </TextField>
-            <TextField fx:id="partNameField" prefHeight="40.0" prefWidth="200.0" promptText="Part Name" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <padding>
-                  <Insets left="15.0" />
-               </padding>
-            </TextField>
-            <TextField fx:id="partInvField" prefHeight="40.0" prefWidth="200.0" promptText="Inv" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <padding>
-                  <Insets left="15.0" />
-               </padding>
-            </TextField>
-            <TextField fx:id="partPriceField" prefHeight="40.0" prefWidth="200.0" promptText="Price/Cost" GridPane.columnIndex="1" GridPane.rowIndex="3">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <padding>
-                  <Insets left="15.0" />
-               </padding>
-            </TextField>
-            <Label text="Max" textFill="#333333" GridPane.rowIndex="4">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="274.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
-               <children>
-                  <TextField fx:id="partMaxField" prefColumnCount="3" prefHeight="40.0" prefWidth="100.0" promptText="Max">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                     <padding>
-                        <Insets left="15.0" />
-                     </padding>
-                  </TextField>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="48.0" text="Min" textFill="#333333">
-                     <HBox.margin>
-                        <Insets right="5.0" />
-                     </HBox.margin>
-                     <font>
+    <children>
+        <Label fx:id="partLabel" layoutX="30.0" layoutY="55.0" text="Add Part" textFill="#333333">
+            <font>
+                <Font name="System Bold" size="21.0" />
+            </font>
+        </Label>
+        <HBox alignment="CENTER" layoutX="160.0" layoutY="48.0" prefHeight="49.0" prefWidth="258.0">
+            <children>
+                <fx:define>
+                    <ToggleGroup fx:id="toggleGroup" />
+                </fx:define>
+                <RadioButton fx:id="inHouse" onAction="#inHouseButtonHandler" mnemonicParsing="false" text="In-House"
+                    toggleGroup="$toggleGroup">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                    <padding>
+                        <Insets right="20.0" />
+                    </padding>
+                </RadioButton>
+                <RadioButton fx:id="outSourced" onAction="#outSourcedButtonHandler" mnemonicParsing="false"
+                    prefHeight="19.0" prefWidth="102.0" text="Outsourced" toggleGroup="$toggleGroup">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </RadioButton>
+            </children>
+        </HBox>
+        <GridPane alignment="CENTER" hgap="10.0" layoutX="46.0" layoutY="108.0" prefHeight="359.0" prefWidth="390.0"
+            vgap="10.0">
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="175.3333740234375" minWidth="10.0"
+                    prefWidth="115.6666259765625" />
+                <ColumnConstraints fillWidth="false" halignment="LEFT" hgrow="SOMETIMES" maxWidth="250.0"
+                    minWidth="10.0" prefWidth="241.3333740234375" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="197.00003051757812" minHeight="0.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="202.0" minHeight="0.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="308.0" minHeight="6.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="308.0" minHeight="10.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="308.0" minHeight="10.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="308.0" minHeight="10.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label text="ID" textFill="#333333">
+                    <font>
                         <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="partMinField" prefHeight="40.0" prefWidth="100.0" promptText="Min">
-                     <font>
+                    </font>
+                </Label>
+                <Label text="Name" textFill="#333333" GridPane.rowIndex="1">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+                <Label text="Inv" textFill="#333333" GridPane.rowIndex="2">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+                <Label text="Price/Cost" textFill="#333333" GridPane.rowIndex="3">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="partIdField" disable="true" prefHeight="40.0" prefWidth="200.0"
+                    text="Auto Gen - Disabled" GridPane.columnIndex="1">
+                    <font>
                         <Font size="14.0" />
-                     </font>
-                     <padding>
+                    </font>
+                    <padding>
                         <Insets left="15.0" />
-                     </padding>
-                  </TextField>
-               </children>
-            </HBox>
-            <Label  fx:id="companyMachineLabel" prefHeight="20.0" prefWidth="112.0" text="Company Name" textFill="#333333" GridPane.rowIndex="5">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <TextField fx:id="companyMachineField" prefHeight="40.0" prefWidth="176.0" promptText="Comp Nm" GridPane.columnIndex="1" GridPane.rowIndex="5">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <padding>
-                  <Insets left="15.0" />
-               </padding>
-            </TextField>
-         </children>
-      </GridPane>
-      <Button layoutX="226.0" layoutY="517.0" mnemonicParsing="false" onAction="#partSaveHandler" prefHeight="41.0" prefWidth="90.0"
-              style="-fx-border-color: #333333; -fx-border-radius: 5;" text="Save" textFill="#333333">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="cancelButton" layoutX="341.0" layoutY="517.0" mnemonicParsing="false"
-          onAction="#cancelButtonHandler" prefHeight="41.0" prefWidth="90.0"
-          style="-fx-border-color: #333333; -fx-border-radius: 5;" text="Cancel" textFill="#333333">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
-   </children>
+                    </padding>
+                </TextField>
+                <TextField fx:id="partNameField" prefHeight="40.0" prefWidth="200.0" promptText="Part Name"
+                    GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                    <padding>
+                        <Insets left="15.0" />
+                    </padding>
+                </TextField>
+                <TextField fx:id="partInvField" prefHeight="40.0" prefWidth="200.0" promptText="Inv"
+                    GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                    <padding>
+                        <Insets left="15.0" />
+                    </padding>
+                </TextField>
+                <TextField fx:id="partPriceField" prefHeight="40.0" prefWidth="200.0" promptText="Price/Cost"
+                    GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                    <padding>
+                        <Insets left="15.0" />
+                    </padding>
+                </TextField>
+                <Label text="Max" textFill="#333333" GridPane.rowIndex="4">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+                <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="274.0" spacing="5.0" GridPane.columnIndex="1"
+                    GridPane.rowIndex="4">
+                    <children>
+                        <TextField fx:id="partMaxField" prefColumnCount="3" prefHeight="40.0" prefWidth="100.0"
+                            promptText="Max">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                            <padding>
+                                <Insets left="15.0" />
+                            </padding>
+                        </TextField>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="48.0" text="Min"
+                            textFill="#333333">
+                            <HBox.margin>
+                                <Insets right="5.0" />
+                            </HBox.margin>
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="partMinField" prefHeight="40.0" prefWidth="100.0" promptText="Min">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                            <padding>
+                                <Insets left="15.0" />
+                            </padding>
+                        </TextField>
+                    </children>
+                </HBox>
+                <Label fx:id="companyMachineLabel" prefHeight="20.0" prefWidth="112.0" text="Company Name"
+                    textFill="#333333" GridPane.rowIndex="5">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="companyMachineField" prefHeight="40.0" prefWidth="176.0" promptText="Comp Nm"
+                    GridPane.columnIndex="1" GridPane.rowIndex="5">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                    <padding>
+                        <Insets left="15.0" />
+                    </padding>
+                </TextField>
+            </children>
+        </GridPane>
+        <Button layoutX="226.0" layoutY="517.0" mnemonicParsing="false" onAction="#partSaveHandler" prefHeight="41.0"
+            prefWidth="90.0" style="-fx-border-color: #333333; -fx-border-radius: 5;" text="Save" textFill="#333333">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Button>
+        <Button fx:id="cancelButton" layoutX="341.0" layoutY="517.0" mnemonicParsing="false"
+            onAction="#cancelButtonHandler" prefHeight="41.0" prefWidth="90.0"
+            style="-fx-border-color: #333333; -fx-border-radius: 5;" text="Cancel" textFill="#333333">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Button>
+    </children>
 </AnchorPane>

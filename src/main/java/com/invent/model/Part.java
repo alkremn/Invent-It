@@ -1,6 +1,5 @@
 package com.invent.model;
 
-import com.sun.javafx.collections.SortableList;
 import javafx.beans.property.*;
 
 public abstract class Part implements Comparable {

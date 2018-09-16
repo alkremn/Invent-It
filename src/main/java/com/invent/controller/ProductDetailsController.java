@@ -11,7 +11,6 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.util.Collections;
-import java.util.Comparator;
 
 public class ProductDetailsController {
 
@@ -66,6 +65,9 @@ public class ProductDetailsController {
 
     @FXML
     private TableColumn<Part, Double> partPriceB;
+
+    @FXML
+    private Button cancelButton;
 
 
     @FXML

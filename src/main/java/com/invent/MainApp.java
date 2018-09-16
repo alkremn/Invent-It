@@ -1,15 +1,15 @@
 package com.invent;
 
-import com.invent.controller.PartDetailsController;
 import com.invent.controller.MainPageController;
+import com.invent.controller.PartDetailsController;
 import com.invent.controller.ProductDetailsController;
 import com.invent.model.Inventory;
 import com.invent.model.Part;
 import com.invent.model.Product;
 import com.invent.model.SampleDataLoader;
 import javafx.application.Application;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Modality;
@@ -84,7 +84,8 @@ public class MainApp extends Application {
             } else {
                 detailsWindow.setTitle("Modify Part");
             }
-
+            Parent root = loader.getRoot();
+            root.requestFocus();
             detailsWindow.showAndWait();
 
         } catch (IOException e) {
@@ -115,7 +116,8 @@ public class MainApp extends Application {
             } else {
                 detailsWindow.setTitle("Modify Product");
             }
-
+            Parent root = loader.getRoot();
+            root.requestFocus();
             detailsWindow.showAndWait();
 
         } catch (IOException e) {
