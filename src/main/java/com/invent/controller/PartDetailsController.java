@@ -221,6 +221,6 @@ public class PartDetailsController {
 
     @FXML
     void initialize() {
-      outSourced.setSelected(true);
+        outSourced.setSelected(true);
     }
 }

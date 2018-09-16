@@ -169,7 +169,7 @@
             </HBox>
             <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <TextField fx:id="productSearchField" alignment="CENTER" prefHeight="25.0" prefWidth="186.0">
+                  <TextField fx:id="partSearchField" prefHeight="25.0" prefWidth="186.0">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>

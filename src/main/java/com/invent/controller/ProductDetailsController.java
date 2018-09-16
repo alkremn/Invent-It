@@ -69,7 +69,7 @@ public class ProductDetailsController {
 
 
     @FXML
-    private TextField productSearchField;
+    private TextField partSearchField;
 
 
     private MainApp mainApp;
@@ -91,7 +91,6 @@ public class ProductDetailsController {
         this.product = product;
         tempPartsListA = FXCollections.observableArrayList();
         tempPartsListB = FXCollections.observableArrayList();
-        setPartTables();
         if (product != null) {
             //setting up products fields
             productLabel.setText("Modify Product");
@@ -102,7 +101,8 @@ public class ProductDetailsController {
             productMaxField.setText(product.maxProperty().getValue().toString());
             productMinField.setText(product.minProperty().getValue().toString());
 
-            tempPartsListB.addAll(product.getAssociatedParts());
+            tempPartsListB = FXCollections.observableArrayList(product.getAssociatedParts());
+            setPartTables();
         }
 
         //setting up Available parts table
@@ -160,7 +160,7 @@ public class ProductDetailsController {
                 product.addPartList(tempPartsListB);
             } else {
                 id = mainApp.getInventory().getAllProducts().size() + 1;
-                Product newProduct = new Product(id,name,price,inv,min,max);
+                Product newProduct = new Product(id, name, price, inv, min, max);
                 newProduct.getAssociatedParts().addAll(tempPartsListB);
                 mainApp.getInventory().getAllProducts().add(newProduct);
             }
@@ -253,28 +253,40 @@ public class ProductDetailsController {
         }
     }
 
-    private void setPartTables(){
-        if(product != null){
-            for(Part part : mainApp.getInventory().getAllParts()){
-                Part foundPart = product.getAssociatedParts().stream()
+    private void setPartTables() {
+        if (!tempPartsListB.isEmpty()) {
+            for (Part part : mainApp.getInventory().getAllParts()) {
+                Part foundPart = tempPartsListB.stream()
                         .filter(part1 -> part1.getPartID() == part.getPartID()).findFirst().orElse(null);
-                if(foundPart == null){
+                if (foundPart == null) {
                     tempPartsListA.add(part);
                 }
             }
-        }else {
-            tempPartsListA.addAll(mainApp.getInventory().getAllParts());
+        } else {
+            tempPartsListA = FXCollections.observableArrayList(mainApp.getInventory().getAllParts());
         }
     }
 
     @FXML
     void partSearchHandler(ActionEvent event) {
-        //TODO: Implement Search method
+        String searchWord = partSearchField.getText();
+        ObservableList<Part> foundList = FXCollections.observableArrayList();
+        if (searchWord != null && !searchWord.isEmpty()) {
+            for (Part part : tempPartsListA) {
+                if (part.getName().toLowerCase().startsWith(searchWord.toLowerCase())) {
+                    foundList.add(part);
+                }
+
+            }
+            tempPartsListA = foundList;
+        } else {
+            setPartTables();
+        }
+        availablePartsTable.setItems(tempPartsListA);
     }
 
     @FXML
     void initialize() {
-
     }
 
 }

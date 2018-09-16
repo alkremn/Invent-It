@@ -13,27 +13,28 @@ public class Inventory {
         this.allParts = FXCollections.observableArrayList();
         this.allProducts = FXCollections.observableArrayList();
     }
-    public void addProduct(final Product product){
+
+    public void addProduct(final Product product) {
         this.allProducts.add(product);
     }
 
-    public void addPart(final Part part){
+    public void addPart(final Part part) {
         this.allParts.add(part);
     }
 
-    public void addPartList(ObservableList<Part> parts){
+    public void addPartList(ObservableList<Part> parts) {
         this.allParts.addAll(parts);
     }
 
-    public void addProductList(final ObservableList<Product> products){
+    public void addProductList(final ObservableList<Product> products) {
         this.allProducts.addAll(products);
     }
 
-    public ObservableList<Part> getAllParts(){
+    public ObservableList<Part> getAllParts() {
         return new SimpleListProperty<>(allParts);
     }
 
-    public ObservableList<Product> getAllProducts(){
+    public ObservableList<Product> getAllProducts() {
         return new SimpleListProperty<>(allProducts);
     }
 }

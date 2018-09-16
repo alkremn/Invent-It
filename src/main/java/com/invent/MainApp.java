@@ -23,7 +23,7 @@ public class MainApp extends Application {
 
     private Inventory inventory;
 
-    public MainApp(){
+    public MainApp() {
         inventory = new Inventory();
 
         inventory.addPartList(SampleDataLoader.loadSampleParts());
@@ -40,8 +40,9 @@ public class MainApp extends Application {
         initMainPageLayout();
 
     }
+
     //Sets up the main layout
-    private void initMainPageLayout(){
+    private void initMainPageLayout() {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("fxml/MainPage.fxml"));
@@ -56,12 +57,12 @@ public class MainApp extends Application {
             mainPageController.setAllFields();
 
 
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void showPartWindow(Part part){
+    public void showPartWindow(Part part) {
         try {
             //Load FXML file and create new Stage for Add Part Window
             FXMLLoader loader = new FXMLLoader();
@@ -78,10 +79,9 @@ public class MainApp extends Application {
             controller.setPartFields(part);
             controller.setPartStage(detailsWindow);
 
-            if(part == null) {
+            if (part == null) {
                 detailsWindow.setTitle("Add New Part");
-            }
-            else{
+            } else {
                 detailsWindow.setTitle("Modify Part");
             }
 
@@ -93,7 +93,7 @@ public class MainApp extends Application {
     }
 
 
-    public void showProductWindow(Product product){
+    public void showProductWindow(Product product) {
         try {
             //Load FXML file and create new Stage for Add Product Window
             FXMLLoader loader = new FXMLLoader();
@@ -110,10 +110,9 @@ public class MainApp extends Application {
             controller.setProductFields(product);
             controller.setProductStage(detailsWindow);
 
-            if(product == null) {
+            if (product == null) {
                 detailsWindow.setTitle("Add New Product");
-            }
-            else{
+            } else {
                 detailsWindow.setTitle("Modify Product");
             }
 
@@ -125,7 +124,7 @@ public class MainApp extends Application {
 
     }
 
-    public void showAlertMessage(final String header, final String message){
+    public void showAlertMessage(final String header, final String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Selection Warning");
         alert.setHeaderText(header);
@@ -136,11 +135,11 @@ public class MainApp extends Application {
 
     //TODO: DO I need this?
     // returns reference to the main stage
-    public Stage getPrimaryStage(){
+    public Stage getPrimaryStage() {
         return primaryStage;
     }
 
-    public Inventory getInventory(){
+    public Inventory getInventory() {
         return inventory;
     }
 

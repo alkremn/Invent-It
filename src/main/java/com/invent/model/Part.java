@@ -93,7 +93,7 @@ public abstract class Part implements Comparable {
     }
 
     public int compareTo(Object obj) {
-        if(obj instanceof Part) {
+        if (obj instanceof Part) {
             Part other = (Part) obj;
             if (this == other) {
                 return 0;

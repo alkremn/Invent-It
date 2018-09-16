@@ -51,7 +51,6 @@ public class MainPageController {
     @FXML
     private TableColumn<Product, Double> productPriceColumn;
 
-
     @FXML
     private TextField searchPartField;
 
@@ -66,7 +65,8 @@ public class MainPageController {
 
 
     //Default Constructor
-    public MainPageController(){}
+    public MainPageController() {
+    }
 
     @FXML
     void initialize() {
@@ -82,12 +82,12 @@ public class MainPageController {
 
     }
 
-    public void setMain(MainApp mainApp){
+    public void setMain(MainApp mainApp) {
         this.mainApp = mainApp;
 
     }
 
-    public void setAllFields(){
+    public void setAllFields() {
         tempPartList = FXCollections.observableArrayList(mainApp.getInventory().getAllParts());
         tempProductList = FXCollections.observableArrayList(mainApp.getInventory().getAllProducts());
         partTableView.setItems(tempPartList);
@@ -109,12 +109,11 @@ public class MainPageController {
     void deletePartButtonHandler(ActionEvent event) {
         Part selectedPart = partTableView.getSelectionModel().getSelectedItem();
 
-        if(selectedPart != null) {
+        if (selectedPart != null) {
             mainApp.getInventory().getAllParts().remove(selectedPart);
             tempPartList.remove(selectedPart);
             partTableView.getSelectionModel().clearSelection();
-        }
-        else{
+        } else {
             mainApp.showAlertMessage("No Part selected", "please, Select the part in the table");
         }
     }
@@ -123,36 +122,35 @@ public class MainPageController {
     void deleteProductButtonHandler(ActionEvent event) {
         Product selectedProduct = productTableView.getSelectionModel().getSelectedItem();
 
-        if(selectedProduct != null) {
+        if (selectedProduct != null) {
             mainApp.getInventory().getAllProducts().remove(selectedProduct);
             tempProductList.remove(selectedProduct);
             productTableView.getSelectionModel().clearSelection();
-        }
-        else{
+        } else {
             mainApp.showAlertMessage("No Product selected", "please, Select the product in the table");
         }
     }
 
     @FXML
     void modifyPartButtonHandler(ActionEvent event) {
-        if(partTableView.getSelectionModel().getSelectedIndex() >= 0){
+        if (partTableView.getSelectionModel().getSelectedIndex() >= 0) {
             Part selectedProduct = partTableView.getSelectionModel().getSelectedItem();
-            if( selectedProduct != null){
+            if (selectedProduct != null) {
                 mainApp.showPartWindow(selectedProduct);
             }
-        }else{
+        } else {
             mainApp.showAlertMessage("No Part selected", "please, Select the part in the table");
         }
     }
 
     @FXML
     void modifyProductButtonHandler(ActionEvent event) {
-        if(productTableView.getSelectionModel().getSelectedIndex() >= 0){
+        if (productTableView.getSelectionModel().getSelectedIndex() >= 0) {
             Product selectedProduct = productTableView.getSelectionModel().getSelectedItem();
-            if(selectedProduct != null){
+            if (selectedProduct != null) {
                 mainApp.showProductWindow(selectedProduct);
             }
-        }else {
+        } else {
             mainApp.showAlertMessage("No Product selected", "please, Select the product in the table");
         }
     }
@@ -161,7 +159,7 @@ public class MainPageController {
     void partSearchButtonHandler(ActionEvent event) {
         String searchWord = searchPartField.getText();
         ObservableList<Part> foundList = FXCollections.observableArrayList();
-        if(searchWord != null && !searchWord.isEmpty()){
+        if (searchWord != null && !searchWord.isEmpty()) {
             for (Part part : tempPartList) {
                 if (part.getName().toLowerCase().startsWith(searchWord.toLowerCase())) {
                     foundList.add(part);
@@ -169,7 +167,7 @@ public class MainPageController {
 
             }
             tempPartList = foundList;
-        }else{
+        } else {
             tempPartList = mainApp.getInventory().getAllParts();
         }
         partTableView.setItems(tempPartList);
@@ -180,7 +178,7 @@ public class MainPageController {
         String searchWord = searchProductField.getText();
 
         ObservableList<Product> foundList = FXCollections.observableArrayList();
-        if(searchWord != null && !searchWord.isEmpty()){
+        if (searchWord != null && !searchWord.isEmpty()) {
             for (Product product : tempProductList) {
                 if (product.getName().toLowerCase().startsWith(searchWord.toLowerCase())) {
                     foundList.add(product);
@@ -188,7 +186,7 @@ public class MainPageController {
 
             }
             tempProductList = foundList;
-        }else{
+        } else {
             tempProductList = mainApp.getInventory().getAllProducts();
         }
         productTableView.setItems(tempProductList);
@@ -197,7 +195,7 @@ public class MainPageController {
 
     @FXML
     void ExitButtonHandler(ActionEvent event) {
-        Window window = ((Node)event.getTarget()).getScene().getWindow();
+        Window window = ((Node) event.getTarget()).getScene().getWindow();
         Stage stage = (Stage) window;
         stage.close();
     }
