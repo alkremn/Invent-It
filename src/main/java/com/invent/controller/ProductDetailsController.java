@@ -1,12 +1,12 @@
 package com.invent.controller;
 
 import com.invent.MainApp;
+import com.invent.model.Part;
 import com.invent.model.Product;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public class ProductDetailsController {
@@ -32,6 +32,36 @@ public class ProductDetailsController {
 
     @FXML
     private TextField productMinField;
+
+    @FXML
+    private TableView<Part> availablePartsTable;
+
+    @FXML
+    private TableColumn<Part, Integer> partIdA;
+
+    @FXML
+    private TableColumn<Part, String> partNameA;
+
+    @FXML
+    private TableColumn<Part, Integer> partInvA;
+
+    @FXML
+    private TableColumn<Part, Double> partPriceA;
+
+    @FXML
+    private TableView<Part> productPartsTable;
+
+    @FXML
+    private TableColumn<Part, Integer> partIdB;
+
+    @FXML
+    private TableColumn<Part, String> partNameB;
+
+    @FXML
+    private TableColumn<Part, Integer> partInvB;
+
+    @FXML
+    private TableColumn<Part, Double> partPriceB;
 
 
     @FXML
@@ -61,7 +91,19 @@ public class ProductDetailsController {
             productMaxField.setText(product.maxProperty().getValue().toString());
             productMinField.setText(product.minProperty().getValue().toString());
         }
+        ObservableList<Part> availableParts = mainApp.getInventory().getAllParts();
+        setPartFields(availableParts);
     }
+
+    private void setPartFields(ObservableList<Part> parts){
+        partIdA.setCellValueFactory(cellData -> cellData.getValue().partIDProperty().asObject());
+        partNameA.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        partInvA.setCellValueFactory((cellData -> cellData.getValue().inStackProperty().asObject()));
+        partPriceA.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
+
+        availablePartsTable.setItems(parts);
+    }
+
 
     public void setProductStage(Stage detailStage){
         this.detailStage = detailStage;

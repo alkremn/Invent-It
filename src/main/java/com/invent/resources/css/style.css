@@ -23,9 +23,7 @@
      -fx-margin: 0;
 }
 
-.table-row-cell:odd{
--fx-background-color: beige;
-}
+
 
 
 .button {
