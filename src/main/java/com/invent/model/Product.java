@@ -2,6 +2,8 @@ package com.invent.model;
 
 import com.sun.javafx.collections.ObservableListWrapper;
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.List;
 
@@ -13,7 +15,7 @@ public class Product {
     private IntegerProperty inStock;
     private IntegerProperty min;
     private IntegerProperty max;
-    private ListProperty<Part> associatedParts;
+    private ObservableList<Part> associatedParts;
 
     public Product(int productID, String name, double price, int inStock, int min, int max) {
         this.productID = new SimpleIntegerProperty(productID);
@@ -23,7 +25,7 @@ public class Product {
         this.min = new SimpleIntegerProperty(min);
         this.max = new SimpleIntegerProperty(max);
 
-        associatedParts = new SimpleListProperty<>();
+        associatedParts = FXCollections.observableArrayList();
     }
 
     public int getProductID() {
@@ -98,7 +100,7 @@ public class Product {
         this.max.set(max);
     }
 
-    public List<Part> getAssociatedParts() {
+    public ObservableList<Part> getAssociatedParts() {
         return associatedParts;
     }
 

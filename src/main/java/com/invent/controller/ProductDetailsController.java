@@ -3,6 +3,7 @@ package com.invent.controller;
 import com.invent.MainApp;
 import com.invent.model.Part;
 import com.invent.model.Product;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -74,6 +75,10 @@ public class ProductDetailsController {
 
     private Stage detailStage;
 
+    private ObservableList<Part> tempPartsListA;
+
+    private ObservableList<Part> tempPartsListB;
+
 
     public void setMainApp(MainApp mainApp){
         this.mainApp = mainApp;
@@ -81,8 +86,12 @@ public class ProductDetailsController {
 
     public void setProductFields(Product product){
         this.product = product;
+        tempPartsListA = FXCollections.observableArrayList(mainApp.getInventory().getAllParts());
+        tempPartsListB = FXCollections.observableArrayList();
         if (product != null) {
+            tempPartsListB.addAll(product.getAssociatedParts());
 
+            //seting up products fields
             productLabel.setText("Modify Product");
             productIdField.setText(product.productIDProperty().getValue().toString());
             productNameField.setText(product.nameProperty().getValue());
@@ -91,31 +100,22 @@ public class ProductDetailsController {
             productMaxField.setText(product.maxProperty().getValue().toString());
             productMinField.setText(product.minProperty().getValue().toString());
         }
-        ObservableList<Part> availableParts = mainApp.getInventory().getAllParts();
-        setPartFields(availableParts);
-    }
-
-    private void setPartFields(ObservableList<Part> parts){
+        //setting up Available parts table
         partIdA.setCellValueFactory(cellData -> cellData.getValue().partIDProperty().asObject());
         partNameA.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         partInvA.setCellValueFactory((cellData -> cellData.getValue().inStackProperty().asObject()));
         partPriceA.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
 
-        availablePartsTable.setItems(parts);
-    }
+        availablePartsTable.setItems(tempPartsListA);
 
-    private void setProductPartFields(ObservableList<Part> parts){
-
-        //TODO: Fix that!!!
-
+        //setting up Product parts table
         partIdB.setCellValueFactory(cellData -> cellData.getValue().partIDProperty().asObject());
         partNameB.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         partInvB.setCellValueFactory((cellData -> cellData.getValue().inStackProperty().asObject()));
         partPriceB.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
 
-        productPartsTable.setItems(parts);
+        productPartsTable.setItems(tempPartsListB);
     }
-
 
     public void setProductStage(Stage detailStage){
         this.detailStage = detailStage;
@@ -123,8 +123,16 @@ public class ProductDetailsController {
 
     @FXML
     void AddPartHandler(ActionEvent event) {
+        int index = availablePartsTable.getSelectionModel().getSelectedIndex();
+        if(index >= 0) {
         Part selectedPart = availablePartsTable.getSelectionModel().getSelectedItem();
-        product.setAssociatedParts(selectedPart);
+        tempPartsListB.add(selectedPart);
+        tempPartsListA.remove(selectedPart);
+        availablePartsTable.getSelectionModel().clearSelection();
+        }
+        else{
+            mainApp.showAlertMessage("No Part selected", "please, Select available part in the table");
+        }
     }
 
     @FXML
@@ -139,7 +147,15 @@ public class ProductDetailsController {
 
     @FXML
     void deletePartHandler(ActionEvent event) {
-        //TODO: Implement delete method
+        int index = productPartsTable.getSelectionModel().getSelectedIndex();
+        if (index >= 0){
+            Part part = productPartsTable.getSelectionModel().getSelectedItem();
+            tempPartsListA.add(part);
+            tempPartsListB.remove(part);
+            productPartsTable.getSelectionModel().clearSelection();
+        }else {
+            mainApp.showAlertMessage("No Part selected", "please, Select available part in the table");
+        }
     }
 
     @FXML

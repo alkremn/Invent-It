@@ -104,7 +104,7 @@ public class MainPageController {
             partTableView.getSelectionModel().clearSelection();
         }
         else{
-            showAlertMessage("No Part selected", "please, Select the part in the table");
+            mainApp.showAlertMessage("No Part selected", "please, Select the part in the table");
         }
     }
 
@@ -117,7 +117,7 @@ public class MainPageController {
             productTableView.getSelectionModel().clearSelection();
         }
         else{
-            showAlertMessage("No Part selected", "please, Select the part in the table");
+            mainApp.showAlertMessage("No Part selected", "please, Select the part in the table");
         }
     }
 
@@ -129,7 +129,7 @@ public class MainPageController {
                 mainApp.showPartWindow(selectedProduct);
             }
         }else{
-            showAlertMessage("No Part selected", "please, Select the part in the table");
+            mainApp.showAlertMessage("No Part selected", "please, Select the part in the table");
         }
     }
 
@@ -141,7 +141,7 @@ public class MainPageController {
                 mainApp.showProductWindow(selectedProduct);
             }
         }else {
-            showAlertMessage("No Product selected", "please, Select the product in the table");
+            mainApp.showAlertMessage("No Product selected", "please, Select the product in the table");
         }
     }
 
@@ -165,13 +165,5 @@ public class MainPageController {
         stage.close();
     }
 
-    private void showAlertMessage(final String header, final String message){
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Selection Warning");
-        alert.setHeaderText(header);
-        alert.setContentText(message);
-        alert.initModality(Modality.APPLICATION_MODAL);
-        alert.showAndWait();
-    }
 
 }
