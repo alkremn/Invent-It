@@ -102,7 +102,7 @@ public class Product {
         return associatedParts;
     }
 
-    public void setAssociatedParts(List<Part> associatedParts) {
-        this.associatedParts = new SimpleListProperty<>(new ObservableListWrapper<>(associatedParts));
+    public void setAssociatedParts(Part associatedPart) {
+        this.associatedParts.add(associatedPart);
     }
 }

@@ -104,6 +104,18 @@ public class ProductDetailsController {
         availablePartsTable.setItems(parts);
     }
 
+    private void setProductPartFields(ObservableList<Part> parts){
+
+        //TODO: Fix that!!!
+
+        partIdB.setCellValueFactory(cellData -> cellData.getValue().partIDProperty().asObject());
+        partNameB.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        partInvB.setCellValueFactory((cellData -> cellData.getValue().inStackProperty().asObject()));
+        partPriceB.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
+
+        productPartsTable.setItems(parts);
+    }
+
 
     public void setProductStage(Stage detailStage){
         this.detailStage = detailStage;
@@ -111,12 +123,13 @@ public class ProductDetailsController {
 
     @FXML
     void AddPartHandler(ActionEvent event) {
-
+        Part selectedPart = availablePartsTable.getSelectionModel().getSelectedItem();
+        product.setAssociatedParts(selectedPart);
     }
 
     @FXML
     void ProductSaveHandler(ActionEvent event) {
-
+        //TODO: Implement save method
     }
 
     @FXML
@@ -126,12 +139,12 @@ public class ProductDetailsController {
 
     @FXML
     void deletePartHandler(ActionEvent event) {
-
+        //TODO: Implement delete method
     }
 
     @FXML
     void partSearchHandler(ActionEvent event) {
-
+        //TODO: Implement Search method
     }
 
     @FXML
