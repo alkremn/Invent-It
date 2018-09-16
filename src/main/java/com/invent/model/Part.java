@@ -1,8 +1,9 @@
 package com.invent.model;
 
+import com.sun.javafx.collections.SortableList;
 import javafx.beans.property.*;
 
-public abstract class Part {
+public abstract class Part implements Comparable {
     private IntegerProperty partID;
     private StringProperty name;
     private DoubleProperty price;
@@ -89,5 +90,16 @@ public abstract class Part {
 
     public void setMax(int max) {
         this.max.set(max);
+    }
+
+    public int compareTo(Object obj) {
+        if(obj instanceof Part) {
+            Part other = (Part) obj;
+            if (this == other) {
+                return 0;
+            }
+            return Integer.compare(this.getPartID(), other.getPartID());
+        }
+        return -1;
     }
 }

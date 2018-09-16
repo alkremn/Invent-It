@@ -8,8 +8,10 @@ import com.invent.model.Part;
 import com.invent.model.Product;
 import com.invent.model.SampleDataLoader;
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -51,6 +53,7 @@ public class MainApp extends Application {
 
             MainPageController mainPageController = loader.getController();
             mainPageController.setMain(this);
+            mainPageController.setAllFields();
 
 
         }catch (IOException e){
@@ -121,6 +124,16 @@ public class MainApp extends Application {
         }
 
     }
+
+    public void showAlertMessage(final String header, final String message){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Selection Warning");
+        alert.setHeaderText(header);
+        alert.setContentText(message);
+        alert.initModality(Modality.APPLICATION_MODAL);
+        alert.showAndWait();
+    }
+
     //TODO: DO I need this?
     // returns reference to the main stage
     public Stage getPrimaryStage(){

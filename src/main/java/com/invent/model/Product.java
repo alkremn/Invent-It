@@ -103,8 +103,10 @@ public class Product {
     public ObservableList<Part> getAssociatedParts() {
         return associatedParts;
     }
-
     public void setAssociatedParts(Part associatedPart) {
         this.associatedParts.add(associatedPart);
+    }
+    public void addPartList(ObservableList<Part> parts){
+        associatedParts = FXCollections.observableArrayList(parts);
     }
 }

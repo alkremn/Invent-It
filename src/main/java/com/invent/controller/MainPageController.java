@@ -3,6 +3,8 @@ package com.invent.controller;
 import com.invent.MainApp;
 import com.invent.model.Part;
 import com.invent.model.Product;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -13,6 +15,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+
+import java.util.Optional;
 
 public class MainPageController {
 
@@ -49,12 +53,16 @@ public class MainPageController {
 
 
     @FXML
-    private TextField partSearchField;
+    private TextField searchPartField;
 
     @FXML
     private TextField searchProductField;
 
     private MainApp mainApp;
+
+    private ObservableList<Part> tempPartList;
+
+    private ObservableList<Product> tempProductList;
 
 
     //Default Constructor
@@ -72,17 +80,19 @@ public class MainPageController {
         productInventoryColumn.setCellValueFactory(cellData -> cellData.getValue().inStockProperty().asObject());
         productPriceColumn.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
 
-
     }
 
     public void setMain(MainApp mainApp){
         this.mainApp = mainApp;
 
-        partTableView.setItems(mainApp.getInventory().getAllParts());
-        productTableView.setItems(mainApp.getInventory().getAllProducts());
     }
 
-
+    public void setAllFields(){
+        tempPartList = FXCollections.observableArrayList(mainApp.getInventory().getAllParts());
+        tempProductList = FXCollections.observableArrayList(mainApp.getInventory().getAllProducts());
+        partTableView.setItems(tempPartList);
+        productTableView.setItems(tempProductList);
+    }
 
     @FXML
     void addPartButtonHandler(ActionEvent event) {
@@ -97,10 +107,11 @@ public class MainPageController {
 
     @FXML
     void deletePartButtonHandler(ActionEvent event) {
-        int index = partTableView.getSelectionModel().getSelectedIndex();
+        Part selectedPart = partTableView.getSelectionModel().getSelectedItem();
 
-        if(index >= 0) {
-            mainApp.getInventory().getAllParts().remove(index);
+        if(selectedPart != null) {
+            mainApp.getInventory().getAllParts().remove(selectedPart);
+            tempPartList.remove(selectedPart);
             partTableView.getSelectionModel().clearSelection();
         }
         else{
@@ -110,14 +121,15 @@ public class MainPageController {
 
     @FXML
     void deleteProductButtonHandler(ActionEvent event) {
-        int index = productTableView.getSelectionModel().getSelectedIndex();
+        Product selectedProduct = productTableView.getSelectionModel().getSelectedItem();
 
-        if(index >= 0) {
-            mainApp.getInventory().getAllProducts().remove(index);
+        if(selectedProduct != null) {
+            mainApp.getInventory().getAllProducts().remove(selectedProduct);
+            tempProductList.remove(selectedProduct);
             productTableView.getSelectionModel().clearSelection();
         }
         else{
-            mainApp.showAlertMessage("No Part selected", "please, Select the part in the table");
+            mainApp.showAlertMessage("No Product selected", "please, Select the product in the table");
         }
     }
 
@@ -147,14 +159,39 @@ public class MainPageController {
 
     @FXML
     void partSearchButtonHandler(ActionEvent event) {
+        String searchWord = searchPartField.getText();
+        ObservableList<Part> foundList = FXCollections.observableArrayList();
+        if(searchWord != null && !searchWord.isEmpty()){
+            for (Part part : tempPartList) {
+                if (part.getName().toLowerCase().startsWith(searchWord.toLowerCase())) {
+                    foundList.add(part);
+                }
 
-        //TODO: implement search part method
+            }
+            tempPartList = foundList;
+        }else{
+            tempPartList = mainApp.getInventory().getAllParts();
+        }
+        partTableView.setItems(tempPartList);
     }
 
     @FXML
     void searchProductButtonHandler(ActionEvent event) {
+        String searchWord = searchProductField.getText();
 
-        //TODO: implement search product method
+        ObservableList<Product> foundList = FXCollections.observableArrayList();
+        if(searchWord != null && !searchWord.isEmpty()){
+            for (Product product : tempProductList) {
+                if (product.getName().toLowerCase().startsWith(searchWord.toLowerCase())) {
+                    foundList.add(product);
+                }
+
+            }
+            tempProductList = foundList;
+        }else{
+            tempProductList = mainApp.getInventory().getAllProducts();
+        }
+        productTableView.setItems(tempProductList);
 
     }
 

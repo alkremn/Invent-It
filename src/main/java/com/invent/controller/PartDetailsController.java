@@ -154,66 +154,66 @@ public class PartDetailsController {
     }
 
     private boolean isInputValid() {
-        StringBuilder error = new StringBuilder();
+        StringBuilder errorMessage = new StringBuilder();
 
         //validate name field
         if (partNameField.getText() == null || partNameField.getText().length() == 0) {
-            error.append("Name cannot be empty!\n");
+            errorMessage.append("Name cannot be empty!\n");
         }
         //validate Inv field
         if (partInvField.getText() == null || partInvField.getText().length() == 0) {
-            error.append("Inv cannot be empty!\n");
+            errorMessage.append("Inv cannot be empty!\n");
         } else {
             //try to parse it to integer
             try {
                 Integer.parseInt(partInvField.getText());
             } catch (NumberFormatException e) {
-                error.append("Inv count must be an integer!\n");
+                errorMessage.append("Inv count must be an integer!\n");
             }
         }
         //validate price field
         if (partPriceField.getText() == null || partPriceField.getText().length() == 0) {
-            error.append("Price cannot be empty\n");
+            errorMessage.append("Price cannot be empty\n");
         } else {
             try {
                 Double.parseDouble(partPriceField.getText());
             } catch (NumberFormatException e) {
-                error.append("Price must be an double!\n");
+                errorMessage.append("Price must be an double!\n");
             }
         }
         //validate max field
         if (partMaxField.getText() == null || partMaxField.getText().length() == 0) {
-            error.append("Max number cannot be empty!\n");
+            errorMessage.append("Max number cannot be empty!\n");
         } else {
             try {
                 Integer.parseInt(partMaxField.getText());
             } catch (NumberFormatException e) {
-                error.append("Max number must be a integer!\n");
+                errorMessage.append("Max number must be a integer!\n");
             }
         }
         //validate min field
         if (partMinField.getText() == null || partMinField.getText().length() == 0) {
-            error.append("Min number cannot be empty!\n");
+            errorMessage.append("Min number cannot be empty!\n");
         } else {
             try {
                 Integer.parseInt(partMinField.getText());
             } catch (NumberFormatException e) {
-                error.append("Min number must be a integer!\n");
+                errorMessage.append("Min number must be a integer!\n");
             }
         }
         if (companyMachineField.getText() == null || companyMachineField.getText().length() == 0) {
             if (isInhouse) {
-                error.append("Machine ID cannot be empty!\n");
+                errorMessage.append("Machine ID cannot be empty!\n");
             } else {
-                error.append("Company Name cannot be empty!\n");
+                errorMessage.append("Company Name cannot be empty!\n");
             }
         }
-        if (error.length() == 0) {
+        if (errorMessage.length() == 0) {
             return true;
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Invalid fields");
-            alert.setContentText(error.toString());
+            alert.setContentText(errorMessage.toString());
             alert.showAndWait();
             return false;
         }

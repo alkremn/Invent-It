@@ -3,6 +3,8 @@ package com.invent.model;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
+import java.util.Comparator;
+
 public class InHouse extends Part {
 
     private IntegerProperty machineID;
@@ -23,4 +25,7 @@ public class InHouse extends Part {
     public void setMachineID(int machineID) {
         this.machineID.set(machineID);
     }
+
+
+
 }
