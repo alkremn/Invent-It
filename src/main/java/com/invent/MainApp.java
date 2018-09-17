@@ -55,6 +55,8 @@ public class MainApp extends Application {
             MainPageController mainPageController = loader.getController();
             mainPageController.setMain(this);
             mainPageController.setAllFields();
+            Parent root = loader.getRoot();
+            root.requestFocus();
 
 
         } catch (IOException e) {

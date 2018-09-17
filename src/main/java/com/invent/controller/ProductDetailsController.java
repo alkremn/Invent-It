@@ -104,8 +104,9 @@ public class ProductDetailsController {
             productMinField.setText(product.minProperty().getValue().toString());
 
             tempPartsListB = FXCollections.observableArrayList(product.getAssociatedParts());
-            setPartTables();
         }
+
+        setPartTables();
 
         //setting up Available parts table
         partIdA.setCellValueFactory(cellData -> cellData.getValue().partIDProperty().asObject());
