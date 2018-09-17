@@ -192,6 +192,9 @@ public class ProductDetailsController {
     }
 
     private boolean isInputValid() {
+
+        //TODO: implement additional numeric boundaries check.
+
         StringBuilder errorMessage = new StringBuilder();
         //validate name input
         if (productNameField.getText() == null || productNameField.getText().length() == 0) {
@@ -272,6 +275,8 @@ public class ProductDetailsController {
 
     @FXML
     void partSearchHandler(ActionEvent event) {
+
+        //TODO: Fix search problem. second search not searching from original list.
         String searchWord = partSearchField.getText();
         ObservableList<Part> foundList = FXCollections.observableArrayList();
         if (searchWord != null && !searchWord.isEmpty()) {

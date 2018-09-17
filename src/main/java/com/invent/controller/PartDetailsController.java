@@ -155,6 +155,8 @@ public class PartDetailsController {
     private boolean isInputValid() {
         StringBuilder errorMessage = new StringBuilder();
 
+        //TODO: implement additional numeric boundaries check.
+
         //validate name field
         if (partNameField.getText() == null || partNameField.getText().length() == 0) {
             errorMessage.append("Name cannot be empty!\n");
