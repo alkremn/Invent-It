@@ -97,7 +97,7 @@ public class MainPageController {
         Part selectedPart = partTableView.getSelectionModel().getSelectedItem();
 
         if (selectedPart != null) {
-            mainApp.getInventory().getAllParts().remove(selectedPart);
+            mainApp.getInventory().removePart(selectedPart);
             partTableView.getItems().remove(selectedPart);
             partTableView.getSelectionModel().clearSelection();
         } else {
@@ -110,7 +110,7 @@ public class MainPageController {
         Product selectedProduct = productTableView.getSelectionModel().getSelectedItem();
 
         if (selectedProduct != null) {
-            mainApp.getInventory().getAllProducts().remove(selectedProduct);
+            mainApp.getInventory().removeProduct(selectedProduct);
             productTableView.getItems().remove(selectedProduct);
             productTableView.getSelectionModel().clearSelection();
         } else {
