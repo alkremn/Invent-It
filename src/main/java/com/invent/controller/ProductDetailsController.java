@@ -49,7 +49,7 @@ public class ProductDetailsController {
     private TableColumn<Part, Integer> partInvA;
 
     @FXML
-    private TableColumn<Part, Double> partPriceA;
+    private TableColumn<Part, String> partPriceA;
 
     @FXML
     private TableView<Part> productPartsTable;
@@ -64,11 +64,7 @@ public class ProductDetailsController {
     private TableColumn<Part, Integer> partInvB;
 
     @FXML
-    private TableColumn<Part, Double> partPriceB;
-
-    @FXML
-    private Button cancelButton;
-
+    private TableColumn<Part, String> partPriceB;
 
     @FXML
     private TextField partSearchField;
@@ -80,22 +76,38 @@ public class ProductDetailsController {
 
     private Stage detailStage;
 
-    private ObservableList<Part> tempPartsListA;
+    private ObservableList<Part> tempAvailableParts;
 
-    private ObservableList<Part> tempPartsListB;
+    private ObservableList<Part> tempProductParts;
 
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
 
+
+    @FXML
+    void initialize() {
+
+        //setting up Available parts table
+        partIdA.setCellValueFactory(cellData -> cellData.getValue().partIDProperty().asObject());
+        partNameA.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        partInvA.setCellValueFactory((cellData -> cellData.getValue().inStackProperty().asObject()));
+        partPriceA.setCellValueFactory(cellData -> cellData.getValue().toObservString());
+
+        //setting up Product parts table
+        partIdB.setCellValueFactory(cellData -> cellData.getValue().partIDProperty().asObject());
+        partNameB.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        partInvB.setCellValueFactory((cellData -> cellData.getValue().inStackProperty().asObject()));
+        partPriceB.setCellValueFactory(cellData -> cellData.getValue().toObservString());
+
+    }
+
     public void setProductFields(Product product) {
         this.product = product;
-        tempPartsListA = FXCollections.observableArrayList();
-        tempPartsListB = FXCollections.observableArrayList();
+
+        //setting up products fields
         if (product != null) {
-            //setting up products fields
-            productLabel.setText("Modify Product");
             productIdField.setText(product.productIDProperty().getValue().toString());
             productNameField.setText(product.nameProperty().getValue());
             productInvField.setText(product.inStockProperty().getValue().toString());
@@ -103,26 +115,21 @@ public class ProductDetailsController {
             productMaxField.setText(product.maxProperty().getValue().toString());
             productMinField.setText(product.minProperty().getValue().toString());
 
-            tempPartsListB = FXCollections.observableArrayList(product.getAssociatedParts());
+            tempAvailableParts = getAvailableParts(product.getAssociatedParts());
+            tempProductParts = product.getAssociatedParts();
+
+            availablePartsTable.setItems(tempAvailableParts);
+            productPartsTable.setItems(tempProductParts);
+
+        } else {
+            tempAvailableParts = getAvailableParts(null);
+            tempProductParts = FXCollections.observableArrayList();
+
+            productLabel.setText("Modify Product");
+            availablePartsTable.setItems(tempAvailableParts);
+            productPartsTable.setItems(tempProductParts);
         }
 
-        setPartTables();
-
-        //setting up Available parts table
-        partIdA.setCellValueFactory(cellData -> cellData.getValue().partIDProperty().asObject());
-        partNameA.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
-        partInvA.setCellValueFactory((cellData -> cellData.getValue().inStackProperty().asObject()));
-        partPriceA.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
-
-        availablePartsTable.setItems(tempPartsListA);
-
-        //setting up Product parts table
-        partIdB.setCellValueFactory(cellData -> cellData.getValue().partIDProperty().asObject());
-        partNameB.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
-        partInvB.setCellValueFactory((cellData -> cellData.getValue().inStackProperty().asObject()));
-        partPriceB.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
-
-        productPartsTable.setItems(tempPartsListB);
     }
 
     public void setProductStage(Stage detailStage) {
@@ -134,10 +141,24 @@ public class ProductDetailsController {
         int index = availablePartsTable.getSelectionModel().getSelectedIndex();
         if (index >= 0) {
             Part selectedPart = availablePartsTable.getSelectionModel().getSelectedItem();
-            tempPartsListB.add(selectedPart);
-            tempPartsListA.remove(selectedPart);
+            tempProductParts.add(selectedPart);
+            tempAvailableParts.remove(selectedPart);
             availablePartsTable.getSelectionModel().clearSelection();
-            Collections.sort(tempPartsListB);
+            Collections.sort(tempProductParts);
+        } else {
+            mainApp.showAlertMessage("No Part selected", "please, Select available part in the table");
+        }
+    }
+
+    @FXML
+    void deletePartHandler(ActionEvent event) {
+        int index = productPartsTable.getSelectionModel().getSelectedIndex();
+        if (index >= 0) {
+            Part part = productPartsTable.getSelectionModel().getSelectedItem();
+            tempAvailableParts.add(part);
+            tempProductParts.remove(part);
+            productPartsTable.getSelectionModel().clearSelection();
+            Collections.sort(tempAvailableParts);
         } else {
             mainApp.showAlertMessage("No Part selected", "please, Select available part in the table");
         }
@@ -160,11 +181,11 @@ public class ProductDetailsController {
                 product.priceProperty().setValue(price);
                 product.maxProperty().setValue(max);
                 product.minProperty().setValue(min);
-                product.addPartList(tempPartsListB);
+               // product.addPartList(tempPartsListB);
             } else {
                 id = mainApp.getInventory().getAllProducts().size() + 1;
                 Product newProduct = new Product(id, name, price, inv, min, max);
-                newProduct.getAssociatedParts().addAll(tempPartsListB);
+                //newProduct.getAssociatedParts().addAll(tempPartsListB);
                 mainApp.getInventory().getAllProducts().add(newProduct);
             }
             detailStage.close();
@@ -177,19 +198,7 @@ public class ProductDetailsController {
         detailStage.close();
     }
 
-    @FXML
-    void deletePartHandler(ActionEvent event) {
-        int index = productPartsTable.getSelectionModel().getSelectedIndex();
-        if (index >= 0) {
-            Part part = productPartsTable.getSelectionModel().getSelectedItem();
-            tempPartsListA.add(part);
-            tempPartsListB.remove(part);
-            productPartsTable.getSelectionModel().clearSelection();
-            Collections.sort(tempPartsListA);
-        } else {
-            mainApp.showAlertMessage("No Part selected", "please, Select available part in the table");
-        }
-    }
+
 
     private boolean isInputValid() {
 
@@ -244,7 +253,7 @@ public class ProductDetailsController {
                 errorMessage.append("Minimum must be an integer!\n");
             }
         }
-        if (tempPartsListB.isEmpty()) {
+        if (product.getAssociatedParts().isEmpty()) {
             errorMessage.append("Part list cannot be Empty");
         }
 
@@ -258,44 +267,41 @@ public class ProductDetailsController {
             return false;
         }
     }
+    //creates list of unique parts available for user to add to the product
+    private ObservableList<Part> getAvailableParts(ObservableList<Part> productParts) {
+        ObservableList<Part> availableParts = FXCollections.observableArrayList();
+            if(productParts != null && !productParts.isEmpty()){
+                for(Part availPart : mainApp.getInventory().getAllParts()){
+                    Part foundPart = productParts.stream().filter(prodPart ->
+                            prodPart.getPartID() == availPart.getPartID()).findFirst().orElse(null);
 
-    private void setPartTables() {
-        if (!tempPartsListB.isEmpty()) {
-            for (Part part : mainApp.getInventory().getAllParts()) {
-                Part foundPart = tempPartsListB.stream()
-                        .filter(part1 -> part1.getPartID() == part.getPartID()).findFirst().orElse(null);
-                if (foundPart == null) {
-                    tempPartsListA.add(part);
+                    if(foundPart == null){
+                        availableParts.add(availPart);
+                    }
                 }
+            } else {
+                availableParts.addAll(mainApp.getInventory().getAllParts());
             }
-        } else {
-            tempPartsListA = FXCollections.observableArrayList(mainApp.getInventory().getAllParts());
-        }
+        return availableParts;
     }
 
+    //Allows user to search for specific part in available parts list
     @FXML
     void partSearchHandler(ActionEvent event) {
-
-        //TODO: Fix search problem. second search not searching from original list.
         String searchWord = partSearchField.getText();
-        ObservableList<Part> foundList = FXCollections.observableArrayList();
+
+        ObservableList<Part> foundProducts = FXCollections.observableArrayList();
+
         if (searchWord != null && !searchWord.isEmpty()) {
-            for (Part part : tempPartsListA) {
-                if (part.getName().toLowerCase().startsWith(searchWord.toLowerCase())) {
-                    foundList.add(part);
+            for (Part availablePart : getAvailableParts(tempProductParts)) {
+                if (availablePart.getName().toLowerCase().startsWith(searchWord.toLowerCase())) {
+                    foundProducts.add(availablePart);
                 }
-
             }
-            tempPartsListA = foundList;
+            tempAvailableParts = foundProducts;
         } else {
-            setPartTables();
+            tempAvailableParts = FXCollections.observableArrayList(getAvailableParts(tempProductParts));
         }
-        availablePartsTable.setItems(tempPartsListA);
+        availablePartsTable.setItems(tempAvailableParts);
     }
-
-
-    @FXML
-    void initialize() {
-    }
-
 }
