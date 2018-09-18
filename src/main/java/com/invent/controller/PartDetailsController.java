@@ -12,7 +12,6 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-
 public class PartDetailsController {
 
     @FXML
@@ -57,7 +56,7 @@ public class PartDetailsController {
 
     private boolean isSaveClicked = false;
 
-    private boolean isInhouseClicked = false;
+    private boolean isInHouseClicked = false;
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
@@ -88,7 +87,6 @@ public class PartDetailsController {
 
     @FXML
     void partSaveHandler(ActionEvent event) {
-
         if (isInputValid()) {
             int id;
             String name = partNameField.getText();
@@ -102,9 +100,9 @@ public class PartDetailsController {
             } else {
                 id = mainApp.getInventory().getAllParts().size() + 1;
             }
-            if (isInhouseClicked) {
+            if (isInHouseClicked) {
                 int machineId = Integer.parseInt(companyMachineField.getText());
-                mainApp.getInventory().addPart(new InHouse(id, name, price, inv,min, max, machineId));
+                mainApp.getInventory().addPart(new InHouse(id, name, price, inv, min, max, machineId));
             } else {
                 String companyName = companyMachineField.getText();
                 mainApp.getInventory().addPart(new Outsourced(id, name, price, inv, min, max, companyName));
@@ -112,25 +110,21 @@ public class PartDetailsController {
             isSaveClicked = true;
             detailStage.close();
         }
-
     }
 
     @FXML
     void inHouseButtonHandler(ActionEvent event) {
         companyMachineLabel.setText("Machine ID");
         companyMachineField.setPromptText("Mach ID");
-        isInhouseClicked = true;
-
-
+        isInHouseClicked = true;
     }
 
     @FXML
     void outSourcedButtonHandler(ActionEvent event) {
         companyMachineLabel.setText("Company Name");
         companyMachineField.setPromptText("Comp Nm");
-        isInhouseClicked = false;
+        isInHouseClicked = false;
     }
-
 
     @FXML
     void cancelButtonHandler(ActionEvent event) {
@@ -141,11 +135,9 @@ public class PartDetailsController {
         this.detailStage = detailsStage;
     }
 
+    //Method is check if the input from the user is valid
     private boolean isInputValid() {
         StringBuilder errorMessage = new StringBuilder();
-
-        //TODO: implement additional numeric boundaries check.
-        //max > min  done!
 
         //validate name field
         if (partNameField.getText() == null || partNameField.getText().length() == 0) {
@@ -201,13 +193,12 @@ public class PartDetailsController {
             } else {
                 errorMessage.append("Company Name cannot be empty!\n");
             }
-        } else if (inHouse.isSelected()){
+        } else if (inHouse.isSelected()) {
             try {
                 Integer.parseInt(companyMachineField.getText());
-            }catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 errorMessage.append("Machine ID must be an integer!\n");
             }
-
         }
         if (errorMessage.length() == 0) {
             return true;
@@ -219,7 +210,6 @@ public class PartDetailsController {
             return false;
         }
     }
-
 
     public boolean isSaveClicked() {
         return this.isSaveClicked;
