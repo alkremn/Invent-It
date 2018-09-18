@@ -108,4 +108,9 @@ public class Product {
     public void addPartList(ObservableList<Part> parts) {
         associatedParts = FXCollections.observableArrayList(parts);
     }
+
+    public StringProperty toObserString(){
+        String str = String.format("$%.2f",price.getValue());
+        return new SimpleStringProperty(str);
+    }
 }

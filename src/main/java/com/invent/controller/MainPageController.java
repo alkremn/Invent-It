@@ -30,7 +30,7 @@ public class MainPageController {
     private TableColumn<Part, Integer> partInventoryColumn;
 
     @FXML
-    private TableColumn<Part, Double> partPriceColumn;
+    private TableColumn<Part, String> partPriceColumn;
 
     @FXML
     private TableView<Product> productTableView;
@@ -45,7 +45,7 @@ public class MainPageController {
     private TableColumn<Product, Integer> productInventoryColumn;
 
     @FXML
-    private TableColumn<Product, Double> productPriceColumn;
+    private TableColumn<Product, String> productPriceColumn;
 
     @FXML
     private TextField searchPartField;
@@ -65,12 +65,12 @@ public class MainPageController {
         partIdColumn.setCellValueFactory(cellData -> cellData.getValue().partIDProperty().asObject());
         partNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         partInventoryColumn.setCellValueFactory(cellData -> cellData.getValue().inStackProperty().asObject());
-        partPriceColumn.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
+        partPriceColumn.setCellValueFactory(cellData -> cellData.getValue().toObservString());
 
         productIdColumn.setCellValueFactory(cellData -> cellData.getValue().productIDProperty().asObject());
         productNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         productInventoryColumn.setCellValueFactory(cellData -> cellData.getValue().inStockProperty().asObject());
-        productPriceColumn.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
+        productPriceColumn.setCellValueFactory(cellData -> cellData.getValue().toObserString());
 
     }
     public void setPartTableView(ObservableList<Part> parts){

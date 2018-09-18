@@ -92,6 +92,11 @@ public abstract class Part implements Comparable {
         this.max.set(max);
     }
 
+    public StringProperty toObservString(){
+        String str = String.format("$%.2f",price.getValue());
+        return new SimpleStringProperty(str);
+    }
+
     public int compareTo(Object obj) {
         if (obj instanceof Part) {
             Part other = (Part) obj;
