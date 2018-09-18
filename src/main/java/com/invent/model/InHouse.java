@@ -9,8 +9,8 @@ public class InHouse extends Part {
 
     private IntegerProperty machineID;
 
-    public InHouse(String name, double price, int inStack, int min, int max, int machineID) {
-        super(name, price, inStack, min, max);
+    public InHouse(int id, String name, double price, int inStack, int min, int max, int machineID) {
+        super(id, name, price, inStack, min, max);
         this.machineID = new SimpleIntegerProperty(machineID);
     }
 

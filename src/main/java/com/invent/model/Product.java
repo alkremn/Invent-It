@@ -5,7 +5,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Product {
-    private static int counter = 0;
     private IntegerProperty productID;
     private StringProperty name;
     private DoubleProperty price;
@@ -14,8 +13,8 @@ public class Product {
     private IntegerProperty max;
     private ObservableList<Part> associatedParts;
 
-    public Product(String name, double price, int inStock, int min, int max) {
-        this.productID = new SimpleIntegerProperty(++counter);
+    public Product(int id, String name, double price, int inStock, int min, int max) {
+        this.productID = new SimpleIntegerProperty(id);
         this.name = new SimpleStringProperty(name);
         this.price = new SimpleDoubleProperty(price);
         this.inStock = new SimpleIntegerProperty(inStock);

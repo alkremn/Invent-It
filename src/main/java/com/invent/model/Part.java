@@ -3,7 +3,6 @@ package com.invent.model;
 import javafx.beans.property.*;
 
 public abstract class Part implements Comparable {
-    private static int counter = 0;
     private IntegerProperty partID;
     private StringProperty name;
     private DoubleProperty price;
@@ -11,8 +10,8 @@ public abstract class Part implements Comparable {
     private IntegerProperty min;
     private IntegerProperty max;
 
-    public Part(String name, double price, int inStack, int min, int max) {
-        this.partID = new SimpleIntegerProperty(++counter);
+    public Part(int id, String name, double price, int inStack, int min, int max) {
+        this.partID = new SimpleIntegerProperty(id);
         this.name = new SimpleStringProperty(name);
         this.price = new SimpleDoubleProperty(price);
         this.inStack = new SimpleIntegerProperty(inStack);

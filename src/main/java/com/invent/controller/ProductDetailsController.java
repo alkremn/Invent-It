@@ -163,7 +163,7 @@ public class ProductDetailsController {
                 product.addPartList(tempPartsListB);
             } else {
                 id = mainApp.getInventory().getAllProducts().size() + 1;
-                Product newProduct = new Product(name, price, inv, min, max);
+                Product newProduct = new Product(id, name, price, inv, min, max);
                 newProduct.getAssociatedParts().addAll(tempPartsListB);
                 mainApp.getInventory().getAllProducts().add(newProduct);
             }

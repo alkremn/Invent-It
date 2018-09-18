@@ -97,6 +97,7 @@ public class MainApp extends Application {
                 mainPageController.setPartTableView(inventory.getAllParts());
                 mainPageController.setProductTableView(inventory.getAllProducts());
             }
+            System.out.println(inventory.getAllParts().size());
 
         } catch (IOException e) {
             e.printStackTrace();

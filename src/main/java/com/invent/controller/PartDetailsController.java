@@ -57,7 +57,7 @@ public class PartDetailsController {
 
     private boolean isSaveClicked = false;
 
-    private boolean isInhouse = false;
+    private boolean isInhouseClicked = false;
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
@@ -82,7 +82,6 @@ public class PartDetailsController {
                 inHouse.setSelected(true);
                 companyMachineLabel.setText("Machine ID");
                 companyMachineField.setText(((InHouse) part).machineIDProperty().getValue().toString());
-                isInhouse = true;
             }
         }
     }
@@ -91,7 +90,7 @@ public class PartDetailsController {
     void partSaveHandler(ActionEvent event) {
 
         if (isInputValid()) {
-
+            int id;
             String name = partNameField.getText();
             int inv = Integer.parseInt(partInvField.getText());
             double price = Double.parseDouble(partPriceField.getText());
@@ -99,25 +98,16 @@ public class PartDetailsController {
             int min = Integer.parseInt(partMinField.getText());
 
             if (part != null) {
-                part.nameProperty().setValue(name);
-                part.inStackProperty().setValue(inv);
-                part.priceProperty().setValue(price);
-                part.maxProperty().setValue(max);
-                part.minProperty().setValue(min);
-                if (isInhouse) {
-                    ((InHouse) part).machineIDProperty().setValue(Integer.parseInt(companyMachineField.getText()));
-                } else {
-                    ((Outsourced) part).companyNameProperty().setValue(companyMachineField.getText());
-                }
+                id = part.getPartID();
             } else {
-
-                if (isInhouse) {
-                    int machineId = Integer.parseInt(companyMachineField.getText());
-                    mainApp.getInventory().addPart(new InHouse(name, price, inv, max, min, machineId));
-                } else {
-                    String companyName = companyMachineField.getText();
-                    mainApp.getInventory().addPart(new Outsourced(name, price, inv, max, min, companyName));
-                }
+                id = mainApp.getInventory().getAllParts().size() + 1;
+            }
+            if (isInhouseClicked) {
+                int machineId = Integer.parseInt(companyMachineField.getText());
+                mainApp.getInventory().addPart(new InHouse(id, name, price, inv,min, max, machineId));
+            } else {
+                String companyName = companyMachineField.getText();
+                mainApp.getInventory().addPart(new Outsourced(id, name, price, inv, min, max, companyName));
             }
             isSaveClicked = true;
             detailStage.close();
@@ -129,6 +119,8 @@ public class PartDetailsController {
     void inHouseButtonHandler(ActionEvent event) {
         companyMachineLabel.setText("Machine ID");
         companyMachineField.setPromptText("Mach ID");
+        isInhouseClicked = true;
+
 
     }
 
@@ -136,6 +128,7 @@ public class PartDetailsController {
     void outSourcedButtonHandler(ActionEvent event) {
         companyMachineLabel.setText("Company Name");
         companyMachineField.setPromptText("Comp Nm");
+        isInhouseClicked = false;
     }
 
 
@@ -176,7 +169,7 @@ public class PartDetailsController {
             try {
                 Double.parseDouble(partPriceField.getText());
             } catch (NumberFormatException e) {
-                errorMessage.append("Price must be an double!\n");
+                errorMessage.append("Price must be a double!\n");
             }
         }
         //validate max field
@@ -186,7 +179,7 @@ public class PartDetailsController {
             try {
                 Integer.parseInt(partMaxField.getText());
             } catch (NumberFormatException e) {
-                errorMessage.append("Max number must be a integer!\n");
+                errorMessage.append("Max number must be an integer!\n");
             }
         }
         //validate min field
@@ -196,18 +189,25 @@ public class PartDetailsController {
             try {
                 Integer.parseInt(partMinField.getText());
             } catch (NumberFormatException e) {
-                errorMessage.append("Min number must be a integer!\n");
+                errorMessage.append("Min number must be an integer!\n");
             }
         }
-        if (Integer.parseInt(partMinField.getText()) >= Integer.parseInt(partMaxField.getText())){
+        if (Integer.parseInt(partMinField.getText()) >= Integer.parseInt(partMaxField.getText())) {
             errorMessage.append("Max value should be bigger min value\n");
         }
         if (companyMachineField.getText() == null || companyMachineField.getText().length() == 0) {
-            if (isInhouse) {
+            if (inHouse.isSelected()) {
                 errorMessage.append("Machine ID cannot be empty!\n");
             } else {
                 errorMessage.append("Company Name cannot be empty!\n");
             }
+        } else if (inHouse.isSelected()){
+            try {
+                Integer.parseInt(companyMachineField.getText());
+            }catch (NumberFormatException e){
+                errorMessage.append("Machine ID must be an integer!\n");
+            }
+
         }
         if (errorMessage.length() == 0) {
             return true;
@@ -221,7 +221,7 @@ public class PartDetailsController {
     }
 
 
-    public boolean isSaveClicked(){
+    public boolean isSaveClicked() {
         return this.isSaveClicked;
     }
 

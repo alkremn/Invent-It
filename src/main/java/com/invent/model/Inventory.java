@@ -26,8 +26,9 @@ public class Inventory {
             int index = allParts.indexOf(foundPart);
             allParts.remove(foundPart);
             allParts.add(index,part);
+        } else {
+            this.allParts.add(part);
         }
-        this.allParts.add(part);
     }
 
     public void addPartList(ObservableList<Part> parts) {
