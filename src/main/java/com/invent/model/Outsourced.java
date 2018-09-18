@@ -7,9 +7,9 @@ public class Outsourced extends Part {
 
     private StringProperty companyName;
 
-    public Outsourced(int partID, String name, double price, int inStack,
+    public Outsourced(String name, double price, int inStack,
                       int min, int max, String companyName) {
-        super(partID, name, price, inStack, min, max);
+        super(name, price, inStack, min, max);
         this.companyName = new SimpleStringProperty(companyName);
     }
 

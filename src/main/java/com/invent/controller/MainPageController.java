@@ -55,10 +55,6 @@ public class MainPageController {
 
     private MainApp mainApp;
 
-    private ObservableList<Part> tempPartList;
-
-    private ObservableList<Product> tempProductList;
-
 
     //Default Constructor
     public MainPageController() {
@@ -77,17 +73,12 @@ public class MainPageController {
         productPriceColumn.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
 
     }
-
-    public void setMain(MainApp mainApp) {
-        this.mainApp = mainApp;
-
+    public void setPartTableView(ObservableList<Part> parts){
+        partTableView.setItems(parts);
     }
 
-    public void setAllFields() {
-        tempPartList = FXCollections.observableArrayList(mainApp.getInventory().getAllParts());
-        tempProductList = FXCollections.observableArrayList(mainApp.getInventory().getAllProducts());
-        partTableView.setItems(tempPartList);
-        productTableView.setItems(tempProductList);
+    public void setProductTableView(ObservableList<Product> products){
+        productTableView.setItems(products);
     }
 
     @FXML
@@ -107,7 +98,7 @@ public class MainPageController {
 
         if (selectedPart != null) {
             mainApp.getInventory().getAllParts().remove(selectedPart);
-            tempPartList.remove(selectedPart);
+            partTableView.getItems().remove(selectedPart);
             partTableView.getSelectionModel().clearSelection();
         } else {
             mainApp.showAlertMessage("No Part selected", "please, Select the part in the table");
@@ -120,7 +111,7 @@ public class MainPageController {
 
         if (selectedProduct != null) {
             mainApp.getInventory().getAllProducts().remove(selectedProduct);
-            tempProductList.remove(selectedProduct);
+            productTableView.getItems().remove(selectedProduct);
             productTableView.getSelectionModel().clearSelection();
         } else {
             mainApp.showAlertMessage("No Product selected", "please, Select the product in the table");
@@ -154,38 +145,41 @@ public class MainPageController {
     @FXML
     void partSearchButtonHandler(ActionEvent event) {
         String searchWord = searchPartField.getText();
+        ObservableList<Part> availableParts = mainApp.getInventory().getAllParts();
         ObservableList<Part> foundList = FXCollections.observableArrayList();
         if (searchWord != null && !searchWord.isEmpty()) {
-            for (Part part : tempPartList) {
+            for (Part part : availableParts) {
                 if (part.getName().toLowerCase().startsWith(searchWord.toLowerCase())) {
                     foundList.add(part);
                 }
-
             }
-            tempPartList = foundList;
+            setPartTableView(foundList);
         } else {
-            tempPartList = mainApp.getInventory().getAllParts();
+            setPartTableView(availableParts);
         }
-        partTableView.setItems(tempPartList);
+
     }
 
     @FXML
     void searchProductButtonHandler(ActionEvent event) {
         String searchWord = searchProductField.getText();
-
-        ObservableList<Product> foundList = FXCollections.observableArrayList();
+        ObservableList<Product> availableProducts = mainApp.getInventory().getAllProducts();
+        ObservableList<Product> foundProducts = FXCollections.observableArrayList();
         if (searchWord != null && !searchWord.isEmpty()) {
-            for (Product product : tempProductList) {
+            for (Product product : availableProducts) {
                 if (product.getName().toLowerCase().startsWith(searchWord.toLowerCase())) {
-                    foundList.add(product);
+                    foundProducts.add(product);
                 }
-
             }
-            tempProductList = foundList;
+            setProductTableView(foundProducts);
         } else {
-            tempProductList = mainApp.getInventory().getAllProducts();
+            setProductTableView(availableProducts);
         }
-        productTableView.setItems(tempProductList);
+
+    }
+
+    public void setMain(MainApp mainApp) {
+        this.mainApp = mainApp;
 
     }
 

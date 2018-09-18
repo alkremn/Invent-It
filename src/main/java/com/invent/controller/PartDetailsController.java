@@ -65,8 +65,8 @@ public class PartDetailsController {
 
     public void setPartFields(Part part) {
         this.part = part;
-        if (part != null) {
 
+        if (part != null) {
             partLabel.setText("Modify Part");
             partIdField.setText(part.partIDProperty().getValue().toString());
             partNameField.setText(part.nameProperty().getValue());
@@ -98,7 +98,6 @@ public class PartDetailsController {
             int max = Integer.parseInt(partMaxField.getText());
             int min = Integer.parseInt(partMinField.getText());
 
-            int id;
             if (part != null) {
                 part.nameProperty().setValue(name);
                 part.inStackProperty().setValue(inv);
@@ -111,16 +110,13 @@ public class PartDetailsController {
                     ((Outsourced) part).companyNameProperty().setValue(companyMachineField.getText());
                 }
             } else {
-                id = mainApp.getInventory().getAllParts().size() + 1;
 
                 if (isInhouse) {
                     int machineId = Integer.parseInt(companyMachineField.getText());
-                    mainApp.getInventory().addPart(new InHouse(id,
-                            name, price, inv, max, min, machineId));
+                    mainApp.getInventory().addPart(new InHouse(name, price, inv, max, min, machineId));
                 } else {
                     String companyName = companyMachineField.getText();
-                    mainApp.getInventory().addPart(new Outsourced(id,
-                            name, price, inv, max, min, companyName));
+                    mainApp.getInventory().addPart(new Outsourced(name, price, inv, max, min, companyName));
                 }
             }
             isSaveClicked = true;
@@ -201,6 +197,9 @@ public class PartDetailsController {
             } catch (NumberFormatException e) {
                 errorMessage.append("Min number must be a integer!\n");
             }
+        }
+        if (Integer.parseInt(partMinField.getText()) >= Integer.parseInt(partMaxField.getText())){
+            errorMessage.append("Max value should be bigger min value\n");
         }
         if (companyMachineField.getText() == null || companyMachineField.getText().length() == 0) {
             if (isInhouse) {

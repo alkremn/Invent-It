@@ -6,25 +6,19 @@
 
 .toggle-button:selected{
  -fx-border-color: #B1B1B1;
- -fx-background-color: red;
+
 }
 
+.table-view {
+     -fx-border-color: #B1B1B1;
+}
 
-.table-view .table-cell  {
-    -fx-font-size: 13px;
+.table-cell  {
+    -fx-font-size: 14px;
     -fx-font-weight: bold;
     -fx-text-fill: #333333;
-    -fx-border-color: #B1B1B1;
-
+    -fx-padding: 10 10 10 15;
 }
-.table-row-cell{
-     -fx-background-insets: 0, 0 0 1 0;
-    -fx-border-insets: 5px;
-     -fx-margin: 0;
-}
-
-
-
 
 .button {
     -fx-background-color: linear-gradient(#f7f7f7, #bcbcbc);

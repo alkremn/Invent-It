@@ -56,7 +56,8 @@ public class MainApp extends Application {
 
             mainPageController = loader.getController();
             mainPageController.setMain(this);
-            mainPageController.setAllFields();
+            mainPageController.setPartTableView(inventory.getAllParts());
+            mainPageController.setProductTableView(inventory.getAllProducts());
             Parent root = loader.getRoot();
             root.requestFocus();
 
@@ -93,7 +94,8 @@ public class MainApp extends Application {
             detailsWindow.showAndWait();
 
             if(controller.isSaveClicked()){
-                mainPageController.setAllFields();
+                mainPageController.setPartTableView(inventory.getAllParts());
+                mainPageController.setProductTableView(inventory.getAllProducts());
             }
 
         } catch (IOException e) {
