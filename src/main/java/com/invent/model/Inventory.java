@@ -19,6 +19,14 @@ public class Inventory {
     }
 
     public void addPart(final Part part) {
+
+        //TODO: figure out how to implement this.
+        Part foundPart = allParts.stream().filter(listPart -> listPart.getPartID() == part.getPartID()).findFirst().orElse(null);
+        if(foundPart != null){
+            int index = allParts.indexOf(foundPart);
+            allParts.remove(foundPart);
+            allParts.add(index,part);
+        }
         this.allParts.add(part);
     }
 
