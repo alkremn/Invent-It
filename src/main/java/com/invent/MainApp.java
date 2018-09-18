@@ -23,6 +23,8 @@ public class MainApp extends Application {
 
     private Inventory inventory;
 
+    private MainPageController mainPageController;
+
     public MainApp() {
         inventory = new Inventory();
 
@@ -52,7 +54,7 @@ public class MainApp extends Application {
             primaryStage.setScene(scene);
             primaryStage.show();
 
-            MainPageController mainPageController = loader.getController();
+            mainPageController = loader.getController();
             mainPageController.setMain(this);
             mainPageController.setAllFields();
             Parent root = loader.getRoot();
@@ -89,6 +91,10 @@ public class MainApp extends Application {
             Parent root = loader.getRoot();
             root.requestFocus();
             detailsWindow.showAndWait();
+
+            if(controller.isSaveClicked()){
+                mainPageController.setAllFields();
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -137,11 +143,6 @@ public class MainApp extends Application {
         alert.showAndWait();
     }
 
-    //TODO: DO I need this?
-    // returns reference to the main stage
-    public Stage getPrimaryStage() {
-        return primaryStage;
-    }
 
     public Inventory getInventory() {
         return inventory;

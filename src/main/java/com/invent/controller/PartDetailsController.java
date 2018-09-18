@@ -220,6 +220,11 @@ public class PartDetailsController {
         }
     }
 
+
+    public boolean isSaveClicked(){
+        return this.isSaveClicked;
+    }
+
     @FXML
     void initialize() {
         outSourced.setSelected(true);
